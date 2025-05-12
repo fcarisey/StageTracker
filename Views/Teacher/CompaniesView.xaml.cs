@@ -1,8 +1,9 @@
-﻿using StageTracker.Services;
-using StageTracker.ViewModels;
-using StageTracker.Views;
-using StageTracker.Views.Teacher;
+﻿using StageTracker.ViewModels.Teacher;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StageTracker
+namespace StageTracker.Views.Teacher
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour Companies.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CompaniesView : Page
     {
-        public MainWindow(MainWindowViewModel vm)
+        public CompaniesView(CompaniesViewModel vm)
         {
             InitializeComponent();
-            DataContext = vm;
+            DataContext =  vm;
         }
     }
 }

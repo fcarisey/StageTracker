@@ -6,7 +6,46 @@
         xmlns:local="clr-namespace:StageTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
-        <Frame Name="Page" NavigationUIVisibility="Hidden"/>
+        <Grid Name="MenuAdmin" VerticalAlignment="Top" Height="60" Visibility="{Binding Session.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding NavigateToAdminClassesViewCommand}" Content="Classes" Margin="10" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Command="{Binding NavigateToAdminTeachersViewCommand}" Content="Enseignants" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+                <Button Command="{Binding NavigateToAdminCompaniesViewCommand}" Content="Entreprises" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+                <Button Command="{Binding NavigateToAdminStudentsViewCommand}" Content="Etudiants" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <Label Content="{Binding Session.Username}" Grid.Column="3" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="20" HorizontalContentAlignment="Right"/>
+
+        </Grid>
+
+        <Grid Name="MenuTeacher" VerticalAlignment="Top" Height="60" Visibility="{Binding Session.IsTeacher, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding NavigateToTeacherClassesViewCommand}" Content="Candidatures" Margin="10" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Command="{Binding NavigateToTeacherCompaniesViewCommand}" Content="Entreprises" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+                <Button Command="{Binding NavigateToTeacherStudentsViewCommand}" Content="Etudiants" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <Label Content="{Binding Session.Username}" Grid.Column="3" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="20" HorizontalContentAlignment="Right"/>
+
+        </Grid>
+
+        <Frame Name="Page" NavigationUIVisibility="Hidden" Margin="0,60,0,0"/>
     </Grid>
 </Window>

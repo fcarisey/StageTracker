@@ -1,5 +1,7 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using Microsoft.Extensions.DependencyInjection;
+using StageTracker.Services;
+using StageTracker.ViewModels;
+using StageTracker.Views;
 using System.Windows;
 
 
@@ -10,6 +12,73 @@ namespace StageTracker
     /// </summary>
     public partial class App : Application
     {
+        public static IServiceProvider? ServiceProvider { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<UserSessionService>();
+
+            services.AddTransient<LoginViewModel>();
+
+            //Admin ViewModels
+            services.AddTransient<ViewModels.Admin.TeachersViewModel>();
+            services.AddTransient<ViewModels.Admin.StudentsViewModel>();
+            services.AddTransient<ViewModels.Admin.ClassesViewModel>();
+            services.AddTransient<ViewModels.Admin.CampaniesViewModel>();
+            services.AddTransient<ViewModels.Admin.Classe.AddViewModel>();
+            services.AddTransient<ViewModels.Admin.Classe.ModifyViewModel>();
+            services.AddTransient<ViewModels.Admin.Student.AddViewModel>();
+            services.AddTransient<ViewModels.Admin.Student.ModifyViewModel>();
+            services.AddTransient<ViewModels.Admin.Company.AddViewModel>();
+            services.AddTransient<ViewModels.Admin.Company.ModifyViewModel>();
+            services.AddTransient<ViewModels.Admin.Teacher.AddViewModel>();
+            services.AddTransient<ViewModels.Admin.Teacher.ModifyViewModel>();
+
+            //Teacher ViewModels
+            services.AddTransient<ViewModels.Teacher.StudentsViewModel>();
+            services.AddTransient<ViewModels.Teacher.CompaniesViewModel>();
+            services.AddTransient<ViewModels.Teacher.ApplicationsViewModel>();
+            services.AddTransient<ViewModels.Teacher.Company.ShowViewModel>();
+            services.AddTransient<ViewModels.Teacher.Student.ShowViewModel>();
+            services.AddTransient<ViewModels.Teacher.Student.Application.ShowViewModel>();
+
+            //Admin Views
+            services.AddTransient<Views.Admin.TeachersView>();
+            services.AddTransient<Views.Admin.StudentsView>();
+            services.AddTransient<Views.Admin.ClassesView>();
+            services.AddTransient<Views.Admin.CompaniesView>();
+            services.AddTransient<Views.Admin.Classe.AddView>();
+            services.AddTransient<Views.Admin.Classe.ModifyView>();
+            services.AddTransient<Views.Admin.Student.AddView>();
+            services.AddTransient<Views.Admin.Student.ModifyView>();
+            services.AddTransient<Views.Admin.Company.AddView>();
+            services.AddTransient<Views.Admin.Company.ModifyView>();
+            services.AddTransient<Views.Admin.Teacher.AddView>();
+            services.AddTransient<Views.Admin.Teacher.ModifyView>();
+
+            //Teacher Views
+            services.AddTransient<Views.Teacher.StudentsView>();
+            services.AddTransient<Views.Teacher.CompaniesView>();
+            services.AddTransient<Views.Teacher.ApplicationsView>();
+            services.AddTransient<Views.Teacher.Company.ShowView>();
+            services.AddTransient<Views.Teacher.Student.ShowView>();
+            services.AddTransient<Views.Teacher.Student.Application.ShowView>();
+
+
+            services.AddTransient<MainWindow>();
+            services.AddTransient<MainWindowViewModel>();
+            services.AddTransient<LoginView>();
+
+            ServiceProvider = services.BuildServiceProvider();
+
+            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Page.Navigate(ServiceProvider.GetRequiredService<LoginView>());
+            mainWindow.Show();
+
+            base.OnStartup(e);
+        }
     }
 
 }
