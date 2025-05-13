@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using System.Windows;
 
@@ -17,14 +18,17 @@ public partial class LoginViewModel : BaseViewModel
 
     private IServiceProvider _provider;
 
-    private UserSessionService _session;
+    private IAuthService _authService;
 
-    public LoginViewModel(UserSessionService session, IServiceProvider provider)
+    private IUserSessionService _session;
+
+    public LoginViewModel(IUserSessionService session, IServiceProvider provider, IAuthService authService)
     {
         Title = "Login";
         Description = "Login to your account";
         _provider = provider;
         _session = session;
+        _authService = authService;
     }
 
     [RelayCommand]
@@ -35,28 +39,7 @@ public partial class LoginViewModel : BaseViewModel
             return;
         }
 
-        // Login admin, prof temporaire
-        if (Identifiant == "admin" && Password == "admin") 
-        { 
-            _session.IsAdmin = true;
-            _session.Username = Identifiant;
-
-            var adminTeachers = _provider.GetRequiredService<Views.Admin.TeachersView>();
-            ((MainWindow)Application.Current.MainWindow).Page.Navigate(adminTeachers);
-        }
-        else if (Identifiant == "prof" && Password == "prof")
-        { 
-            _session.IsTeacher = true;
-            _session.Username = Identifiant;
-
-            var studentView = _provider.GetRequiredService<Views.Teacher.StudentsView>();
-            ((MainWindow)Application.Current.MainWindow).Page.Navigate(studentView);
-        }
-        else
-        {
-            MessageBox.Show("Invalid credentials");
-            return;
-        }
+        _authService.Authenticate(Identifiant, Password);
     }
 
 }

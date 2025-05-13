@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using StageTracker.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StageTracker.Services
 {
-    public partial class UserSessionService : ObservableObject
+    public partial class UserSessionService : ObservableObject, IUserSessionService
     {
         [ObservableProperty]
         public string _username;

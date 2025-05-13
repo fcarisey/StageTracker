@@ -19,8 +19,9 @@ namespace StageTracker
         {
             ServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<UserSessionService>();
+            services.AddSingleton<IUserSessionService, UserSessionService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IAuthService, AuthService>();
 
             services.AddTransient<LoginViewModel>();
 

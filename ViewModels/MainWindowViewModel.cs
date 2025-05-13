@@ -9,19 +9,15 @@ namespace StageTracker.ViewModels;
 
 public partial class MainWindowViewModel : BaseViewModel
 {
-
-    private IServiceProvider _provider;
-
     [ObservableProperty]
-    private UserSessionService _session;
+    private IUserSessionService _session;
 
-    private INavigationService _navigation;
+    private readonly INavigationService _navigation;
 
-    public MainWindowViewModel(UserSessionService session, IServiceProvider provider, INavigationService navigation) 
+    public MainWindowViewModel(IUserSessionService session, INavigationService navigation) 
     {
         Title = "Main Window";
         Description = "Main Window of the application";
-        _provider = provider;
         _session = session;
         _navigation = navigation;
     }

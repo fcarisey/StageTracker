@@ -11,7 +11,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
-        <Grid Name="MenuAdmin" VerticalAlignment="Top" Height="60" Visibility="{Binding Session.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Name="MenuAdmin" VerticalAlignment="Top" Height="60" Visibility="{Binding Session.IsAdmin, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="400"/>
@@ -25,11 +25,11 @@
                 <Button Command="{Binding NavigateToAdminStudentsViewCommand}" Content="Etudiants" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <Label Content="{Binding Session.Username}" Grid.Column="3" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="20" HorizontalContentAlignment="Right"/>
+            <Label Content="{Binding Session.Username, Mode=OneWay}" Grid.Column="3" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="20" HorizontalContentAlignment="Right"/>
 
         </Grid>
 
-        <Grid Name="MenuTeacher" VerticalAlignment="Top" Height="60" Visibility="{Binding Session.IsTeacher, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Name="MenuTeacher" VerticalAlignment="Top" Height="60" Visibility="{Binding Session.IsTeacher, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="400"/>
@@ -42,7 +42,7 @@
                 <Button Command="{Binding NavigateToTeacherStudentsViewCommand}" Content="Etudiants" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <Label Content="{Binding Session.Username}" Grid.Column="3" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="20" HorizontalContentAlignment="Right"/>
+            <Label Content="{Binding Session.Username, Mode=OneWay}" Grid.Column="3" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="20" HorizontalContentAlignment="Right"/>
 
         </Grid>
 
