@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using StageTracker.ViewModels;
 using StageTracker.Views;
@@ -19,6 +20,7 @@ namespace StageTracker
             ServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<UserSessionService>();
+            services.AddSingleton<INavigationService, NavigationService>();
 
             services.AddTransient<LoginViewModel>();
 
@@ -73,8 +75,11 @@ namespace StageTracker
 
             ServiceProvider = services.BuildServiceProvider();
 
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Page.Navigate(ServiceProvider.GetRequiredService<LoginView>());
+            MainWindow mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+
+            INavigationService navigationService = ServiceProvider.GetRequiredService<INavigationService>();
+            navigationService.NavigateTo<LoginView>();
+
             mainWindow.Show();
 
             base.OnStartup(e);

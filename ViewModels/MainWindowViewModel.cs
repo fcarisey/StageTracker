@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using System.Windows;
 
@@ -14,63 +15,59 @@ public partial class MainWindowViewModel : BaseViewModel
     [ObservableProperty]
     private UserSessionService _session;
 
-    public MainWindowViewModel(UserSessionService session, IServiceProvider provider) 
+    private INavigationService _navigation;
+
+    public MainWindowViewModel(UserSessionService session, IServiceProvider provider, INavigationService navigation) 
     {
         Title = "Main Window";
         Description = "Main Window of the application";
         _provider = provider;
         _session = session;
+        _navigation = navigation;
     }
 
     
     [RelayCommand]
-    public void NavigateToAdminClassesViewCommand() 
+    public void NavigateToAdminClassesView() 
     {
-        var classesAdminView = _provider.GetRequiredService<Views.Admin.ClassesView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(classesAdminView);
+        _navigation.NavigateTo<Views.Admin.ClassesView>();
     }
     
     [RelayCommand]
-    public void NavigateToAdminTeachersViewCommand() 
+    public void NavigateToAdminTeachersView() 
     {
-        var teachersAdminView = _provider.GetRequiredService<Views.Admin.TeachersView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(teachersAdminView);
+        _navigation.NavigateTo<Views.Admin.TeachersView>();
     }
     
     [RelayCommand]
-    public void NavigateToAdminCompaniesViewCommand() 
+    public void NavigateToAdminCompaniesView() 
     {
-        var CompaniesAdminView = _provider.GetRequiredService<Views.Admin.CompaniesView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(CompaniesAdminView);
+        _navigation.NavigateTo<Views.Admin.CompaniesView>();
     }
     
     [RelayCommand]
-    public void NavigateToAdminStudentsViewCommand() 
+    public void NavigateToAdminStudentsView() 
     {
-        var StudentsAdminView = _provider.GetRequiredService<Views.Admin.StudentsView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(StudentsAdminView);
+        _navigation.NavigateTo<Views.Admin.StudentsView>();
     }
 
 
 
     [RelayCommand]
-    public void NavigateToTeacherClassesViewCommand() 
+    public void NavigateToTeacherClassesView() 
     {
-        var TeacherClassesView = _provider.GetRequiredService<Views.Teacher.ApplicationsView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(TeacherClassesView);
+        _navigation.NavigateTo<Views.Teacher.ApplicationsView>();
     }
 
     [RelayCommand]
-    public void NavigateToTeacherCompaniesViewCommand() 
+    public void NavigateToTeacherCompaniesView() 
     {
-        var TeacherCompaniesView = _provider.GetRequiredService<Views.Teacher.CompaniesView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(TeacherCompaniesView);
+        _navigation.NavigateTo<Views.Teacher.CompaniesView>();
     }
 
     [RelayCommand]
-    public void NavigateToTeacherStudentsViewCommand()
+    public void NavigateToTeacherStudentsView()
     {
-        var TeacherStudentsView = _provider.GetRequiredService<Views.Teacher.StudentsView>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(TeacherStudentsView);
+         _navigation.NavigateTo<Views.Teacher.StudentsView>();
     }
 }
