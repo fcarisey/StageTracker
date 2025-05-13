@@ -5,11 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StageTracker.Views.Teacher"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800"  
       Title="{Binding Title}">
 
     <Grid Background="White">
         <Label Content="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        <Label Content="Etudiants" HorizontalAlignment="Left" Margin="60,50,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TB_Search" HorizontalAlignment="Left" Margin="60,108,0,0" TextWrapping="Wrap" Text="Recherche ..." VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242"/>
+        <DataGrid ItemsSource="{Binding Students}" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="94,151,0,0" Height="200" Width="646" MaxHeight="200">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="*"/>
+                <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}" Width="*"/>
+                <DataGridTextColumn Header="Classe" Binding="{Binding Classe}" Width="*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                <DataGridTemplateColumn Header="" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding DataContext.NavigateToStudentDetailsViewCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" Content="Détails" Margin="5"/>
+                                <Button Command="{Binding DataContext.NavigateToStudentEditViewCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" Content="Modifier" Margin="5"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            
+        </DataGrid>
     </Grid>
 </Page>
