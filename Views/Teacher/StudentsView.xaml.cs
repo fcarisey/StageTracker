@@ -26,4 +26,9 @@ public partial class StudentsView : Page
         InitializeComponent();
         DataContext = vm;
     }
+
+    private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        ((DataGrid)sender).UnselectAll();
+    }
 }

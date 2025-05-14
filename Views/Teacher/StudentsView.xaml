@@ -12,12 +12,12 @@
         <Label Content="Etudiants" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
         <TextBox x:Name="TB_Search" HorizontalAlignment="Left" Margin="60,67,0,0" TextWrapping="Wrap" Text="Recherche ..." VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242"/>
         
-        <DataGrid IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Students}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="75,106,75,0" MaxHeight="225" MinWidth="650" MaxWidth="900" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
+        <DataGrid SelectionChanged="DataGrid_SelectionChanged" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Students}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="75,106,75,0" MaxHeight="225" MinWidth="650" MaxWidth="900" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding LastName}" Width="*" MinWidth="105" MaxWidth="200"/>
                 <DataGridTextColumn Header="Prénom" Binding="{Binding FirstName}" Width="*" MinWidth="105" MaxWidth="200"/>
                 <DataGridTextColumn Header="Classe" Binding="{Binding Classe}" Width="SizeToCells"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Mail}" Width="*" MinWidth="250" MaxWidth="400"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" MinWidth="250" MaxWidth="400"/>
                 <DataGridTemplateColumn Header="" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

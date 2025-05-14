@@ -14,17 +14,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StageTracker.Views.Teacher
+namespace StageTracker.Views.Teacher;
+
+/// <summary>
+/// Logique d'interaction pour Companies.xaml
+/// </summary>
+public partial class CompaniesView : Page
 {
-    /// <summary>
-    /// Logique d'interaction pour Companies.xaml
-    /// </summary>
-    public partial class CompaniesView : Page
+    public CompaniesView(CompaniesViewModel vm)
     {
-        public CompaniesView(CompaniesViewModel vm)
-        {
-            InitializeComponent();
-            DataContext =  vm;
-        }
+        InitializeComponent();
+        DataContext =  vm;
+    }
+
+    private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        ((DataGrid)sender).UnselectAll();
     }
 }

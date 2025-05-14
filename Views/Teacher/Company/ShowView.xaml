@@ -9,7 +9,27 @@
       Title="{Binding Title}">
 
     <Grid Background="White">
-        <Label Content="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Label d:Content="Raison social" Content="{Binding Company.Name}" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Margin="60,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock FontSize="14">
+            <Run Text="Téléphone : "/>
+            <Run Text="{Binding Company.PhoneNumber}" d:Text="00.00.00.00.00"/>
+            </TextBlock>
+            <TextBlock FontSize="14">
+            <Run Text="Adresse Mail : "/>
+            <Run Text="{Binding Company.Email}" d:Text="jdoe@exemple.com"/>
+            </TextBlock>
+            <TextBlock FontSize="14">
+            <Run Text="Adresse : "/>
+            <Run Text="{Binding Company.Address}" d:Text="0, rue de l'exemple"/>
+            </TextBlock>
+        </StackPanel>
 
     </Grid>
 </Page>

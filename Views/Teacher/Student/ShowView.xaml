@@ -29,11 +29,11 @@
         <StackPanel Margin="60,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBlock FontSize="14">
                 <Run Text="Téléphone : "/>
-                <Run Text="{Binding Student.Phone}" d:Text="00.00.00.00.00"/>
+                <Run Text="{Binding Student.PhoneNumber}" d:Text="00.00.00.00.00"/>
             </TextBlock>
             <TextBlock FontSize="14">
                 <Run Text="Adresse Mail : "/>
-                <Run Text="{Binding Student.Mail}" d:Text="jdoe@exemple.com"/>
+                <Run Text="{Binding Student.Email}" d:Text="jdoe@exemple.com"/>
             </TextBlock>
             <TextBlock FontSize="14">
                 <Run Text="Adresse : "/>

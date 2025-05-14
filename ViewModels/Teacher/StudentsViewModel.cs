@@ -25,17 +25,17 @@ public partial class StudentsViewModel : BaseViewModel
     {
         Students = new ObservableCollection<Models.Student>
         {
-            new() { Id = 1, Address = "6, Rue du beau lièvre", LastName = "Dupont", FirstName = "Alice", Classe = "BTS SIO1", Mail = "alice.dupont@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 2, Address = "6, Rue du beau lièvre", LastName = "Martin", FirstName = "Lucas", Classe = "BTS SIO1", Mail = "lucas.martin@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Mail = "chloe.nguyen@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Mail = "julien.lemoine@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Mail = "emma.bouchard@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Mail = "chloe.nguyen@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Mail = "julien.lemoine@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Mail = "emma.bouchard@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Mail = "chloe.nguyen@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Mail = "julien.lemoine@example.com", Phone = "00.00.00.00.00" },
-            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Mail = "emma.bouchard@example.com", Phone = "00.00.00.00.00" }
+            new() { Id = 1, Address = "6, Rue du beau lièvre", LastName = "Dupont", FirstName = "Alice", Classe = "BTS SIO1", Email = "alice.dupont@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 2, Address = "6, Rue du beau lièvre", LastName = "Martin", FirstName = "Lucas", Classe = "BTS SIO1", Email = "lucas.martin@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" }
         };
         _navigationService = navigationService;
     }
