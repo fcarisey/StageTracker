@@ -8,9 +8,13 @@ namespace StageTracker.Models;
 
 public class Student
 {
-    public int Id { get; set; }
-    public string Nom { get; set; }
-    public string Prenom { get; set; }
-    public string Classe { get; set; }
-    public string Email { get; set; }
+    public required int Id { get; set; }
+    public required string LastName { get; set; }
+    public required string FirstName { get; set; }
+    public string? FullName => $"{FirstName} {LastName}";
+    public string? Classe { get; set; }
+    public string? Mail { get; set; }
+    public string? Phone { get; set; }
+    public string? Address { get; set; }
+
 }

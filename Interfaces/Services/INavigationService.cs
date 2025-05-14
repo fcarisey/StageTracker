@@ -9,4 +9,5 @@ namespace StageTracker.Interfaces.Services;
 public interface INavigationService
 {
     public void NavigateTo<TView>() where TView : class;
+    public void NavigateTo<T>(object parameter) where T : class;
 }

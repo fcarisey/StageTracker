@@ -5,11 +5,41 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StageTracker.Views.Teacher.Student"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="390" d:DesignWidth="800"
       Title="{Binding Title}">
 
     <Grid Background="White">
-        <Label Content="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Label d:Content="John Doe" Content="{Binding Student.FullName}" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,23,0,0" Height="26" Width="80">
+                    <Label Content="Remarque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" />
+                    <Button Command="{Binding AddRemarkCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,57,0,0" Height="26" Width="130" Grid.RowSpan="1">
+                <Label d:Content="Télécharger le CV:" Content="Télécharger le CV:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <Button Command="{Binding DownloadCVCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Margin="60,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock FontSize="14">
+                <Run Text="Téléphone : "/>
+                <Run Text="{Binding Student.Phone}" d:Text="00.00.00.00.00"/>
+            </TextBlock>
+            <TextBlock FontSize="14">
+                <Run Text="Adresse Mail : "/>
+                <Run Text="{Binding Student.Mail}" d:Text="jdoe@exemple.com"/>
+            </TextBlock>
+            <TextBlock FontSize="14">
+                <Run Text="Adresse : "/>
+                <Run Text="{Binding Student.Address}" d:Text="0, rue de l'exemple"/>
+            </TextBlock>
+        </StackPanel>
 
     </Grid>
 </Page>
