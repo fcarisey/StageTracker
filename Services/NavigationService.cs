@@ -4,36 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using StageTracker.Interfaces.Services;
 using StageTracker.Interfaces.ViewModels;
+using StageTracker.ViewModels;
 
 namespace StageTracker.Services;
 
-public class NavigationService : INavigationService
+public class NavigationService(IServiceProvider provider) : INavigationService
 {
-    private readonly IServiceProvider _provider;
+    private readonly IServiceProvider _provider = provider;
 
-    public NavigationService(IServiceProvider provider) => _provider = provider;
+    private static MainWindow MainWindow => (MainWindow)Application.Current.MainWindow;
 
-    public void NavigateTo<T>() where T : class
+    public void NavigateTo<TView>() where TView : UserControl
     {
-        var navigateTo = _provider.GetRequiredService<T>();
-        ((MainWindow)Application.Current.MainWindow).Page.Navigate(navigateTo);
+        var navigateTo = _provider.GetRequiredService<TView>();
+        ((MainWindowViewModel)MainWindow.DataContext).CurrentPage = navigateTo;
     }
 
-    public void NavigateTo<T>(object parameter) where T : class
+    public void NavigateTo<TView>(object parameter) where TView : UserControl
     {
-        var navigateTo = _provider.GetRequiredService<T>();
+        var navigateTo = _provider.GetRequiredService<TView>();
 
         if (navigateTo is INavigableWithParameter navigable)
         {
             navigable.OnNavigatedTo(parameter);
-            ((MainWindow)Application.Current.MainWindow).Page.Navigate(navigateTo);
+            ((MainWindowViewModel)MainWindow.DataContext).CurrentPage = navigateTo;
         }
         else
         {
-            throw new InvalidOperationException($"Type {typeof(T).Name} does not implement INavigableWithParameter.");
+            throw new InvalidOperationException($"Type {typeof(TView).Name} does not implement INavigableWithParameter.");
         }
 
     }

@@ -20,7 +20,7 @@ namespace StageTracker.Views.Teacher.Student;
 /// <summary>
 /// Logique d'interaction pour Show.xaml
 /// </summary>
-public partial class ShowView : Page, INavigableWithParameter
+public partial class ShowView : UserControl, INavigableWithParameter
 {
     public ShowView(ShowViewModel vm)
     {

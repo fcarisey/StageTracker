@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace StageTracker.ViewModels;
 
@@ -13,6 +14,9 @@ public partial class MainWindowViewModel : BaseViewModel
     private IUserSessionService _session;
 
     private readonly INavigationService _navigation;
+
+    [ObservableProperty]
+    public required UserControl _currentPage;
 
     public MainWindowViewModel(IUserSessionService session, INavigationService navigation) 
     {

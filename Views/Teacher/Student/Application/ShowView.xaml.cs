@@ -19,7 +19,7 @@ namespace StageTracker.Views.Teacher.Student.Application;
 /// <summary>
 /// Logique d'interaction pour Show.xaml
 /// </summary>
-public partial class ShowView : Page
+public partial class ShowView : UserControl
 {
     public ShowView(ShowViewModel vm)
     {

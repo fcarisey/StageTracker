@@ -19,7 +19,7 @@ namespace StageTracker.Views.Admin.Company;
 /// <summary>
 /// Logique d'interaction pour Modify.xaml
 /// </summary>
-public partial class ModifyView : Page
+public partial class ModifyView : UserControl
 {
     public ModifyView(ModifyViewModel vm)
     {

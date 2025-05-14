@@ -19,7 +19,7 @@ namespace StageTracker.Views.Admin.Teacher;
 /// <summary>
 /// Logique d'interaction pour Add.xaml
 /// </summary>
-public partial class AddView : Page
+public partial class AddView : UserControl
 {
     public AddView(AddViewModel vm)
     {

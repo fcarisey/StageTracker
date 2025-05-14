@@ -19,7 +19,7 @@ namespace StageTracker.Views.Teacher;
 /// <summary>
 /// Logique d'interaction pour Companies.xaml
 /// </summary>
-public partial class CompaniesView : Page
+public partial class CompaniesView : UserControl
 {
     public CompaniesView(CompaniesViewModel vm)
     {

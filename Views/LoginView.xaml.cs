@@ -19,7 +19,7 @@ namespace StageTracker.Views;
 /// <summary>
 /// Logique d'interaction pour Login.xaml
 /// </summary>
-public partial class LoginView : Page
+public partial class LoginView : UserControl
 {
     public LoginView(LoginViewModel vm)
     {

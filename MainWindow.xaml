@@ -46,6 +46,6 @@
 
         </Grid>
 
-        <Frame Name="Page" NavigationUIVisibility="Hidden" Margin="0,60,0,0"/>
+        <ContentControl Content="{Binding CurrentPage}" Margin="0,60,0,0"/>
     </Grid>
 </Window>

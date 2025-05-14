@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Controls;
 
 namespace StageTracker.Interfaces.Services;
 
 public interface INavigationService
 {
-    public void NavigateTo<TView>() where TView : class;
-    public void NavigateTo<T>(object parameter) where T : class;
+    public void NavigateTo<TView>() where TView : UserControl;
+    public void NavigateTo<TView>(object parameter) where TView : UserControl;
 }

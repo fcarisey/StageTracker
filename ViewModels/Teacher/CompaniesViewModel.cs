@@ -20,8 +20,12 @@ public partial class CompaniesViewModel : BaseViewModel
     [ObservableProperty]
     private ObservableCollection<Models.Company> _companies;
 
+    private static int _counter;
+
     public CompaniesViewModel(INavigationService navigationService)
     {
+        _counter++;
+        Debug.WriteLine($"CompaniesViewModel instance count: {_counter}");
         _navigationService = navigationService;
         Companies = new ObservableCollection<Models.Company>
         {

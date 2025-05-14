@@ -19,7 +19,7 @@ namespace StageTracker.Views.Admin;
 /// <summary>
 /// Logique d'interaction pour Teachers.xaml
 /// </summary>
-public partial class TeachersView : Page
+public partial class TeachersView : UserControl
 {
     public TeachersView(TeachersViewModel vm)
     {
