@@ -16,18 +16,11 @@ public partial class LoginViewModel : BaseViewModel
     [ObservableProperty]
     private string _password = string.Empty;
 
-    private IServiceProvider _provider;
+    private readonly IAuthService _authService;
 
-    private IAuthService _authService;
-
-    private IUserSessionService _session;
-
-    public LoginViewModel(IUserSessionService session, IServiceProvider provider, IAuthService authService)
+    public LoginViewModel(IAuthService authService)
     {
-        Title = "Login";
         Description = "Login to your account";
-        _provider = provider;
-        _session = session;
         _authService = authService;
     }
 

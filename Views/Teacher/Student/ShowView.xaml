@@ -3,9 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:StageTracker.Views.Teacher.Student"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:StageTracker.Views.Teacher.Student" xmlns:behaviors="clr-namespace:StageTracker.Behaviors" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
       d:DesignHeight="390" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Background="White">
 
@@ -39,6 +43,28 @@
                 <Run Text="{Binding Student.Address}" d:Text="0, rue de l'exemple"/>
             </TextBlock>
         </StackPanel>
+
+        <DataGrid IsReadOnly="True" Visibility="{Binding Student.HasApplication, Converter={StaticResource BooleanToVisibilityConverter}}" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Student.Applications}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="300,142,60,0" MaxHeight="225" MaxWidth="900" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Entreprise" Binding="{Binding Internship.Company.Name}" Width="*" MinWidth="105" MaxWidth="115"/>
+                <DataGridTextColumn Header="Statu" Binding="{Binding Status}" Width="*" MinWidth="105" MaxWidth="115"/>
+                <DataGridTemplateColumn Header="" MinWidth="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding DataContext.NavigateToStudentApplicationShowViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Content="Détails" Margin="5" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource VerticalScrollBar}"/>
+            </DataGrid.Resources>
+            <i:Interaction.Behaviors>
+                <behaviors:DataGridUnselectAllOnSelectionChangedBehavior/>
+            </i:Interaction.Behaviors>
+        </DataGrid>
 
     </Grid>
 </UserControl>

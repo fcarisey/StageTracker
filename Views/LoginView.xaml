@@ -9,7 +9,7 @@
     <Grid Background="White">
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50">
-            <Label Content="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Margin="0,0,0,50"/>
+            <Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Margin="0,0,0,50"/>
 
             <StackPanel>
                 <Label Content="Identifiant" HorizontalAlignment="Left" Margin="5,5,5,0"/>

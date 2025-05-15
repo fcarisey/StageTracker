@@ -20,7 +20,6 @@ public partial class MainWindowViewModel : BaseViewModel
 
     public MainWindowViewModel(IUserSessionService session, INavigationService navigation) 
     {
-        Title = "Main Window";
         Description = "Main Window of the application";
         _session = session;
         _navigation = navigation;

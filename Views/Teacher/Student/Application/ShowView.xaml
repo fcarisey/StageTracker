@@ -3,12 +3,85 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:StageTracker.Views.Teacher.Student.Application"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      xmlns:local="clr-namespace:StageTracker.Views.Teacher.Student.Application" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:behaviors="clr-namespace:StageTracker.Behaviors"
+             mc:Ignorable="d" 
+      d:DesignHeight="390" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Background="White">
-        <Label Content="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Label d:Content="John Doe" Content="{Binding Application.Student.FullName}" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,23,0,0" Height="26" Width="80">
+                        <Label Content="Remarque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" />
+                        <Button Command="{Binding AddRemarkCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,57,0,0" Height="26" Width="130" Grid.RowSpan="1">
+                    <Label d:Content="Télécharger le CV:" Content="Télécharger le CV:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Button Command="{Binding DownloadCVCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,83,0,0" Height="26" Width="130" Grid.RowSpan="1">
+                    <Label d:Content="Télécharger le LM:" Content="Télécharger la LM:"/>
+                    <Button Command="{Binding DownloadLMCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Margin="60,136,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock FontSize="14">
+                    <Run Text="Téléphone : "/>
+                    <Run Text="{Binding Application.Student.PhoneNumber}" d:Text="00.00.00.00.00"/>
+                </TextBlock>
+                <TextBlock FontSize="14">
+                    <Run Text="Adresse Mail : "/>
+                    <Run Text="{Binding Application.Student.Email}" d:Text="jdoe@exemple.com"/>
+                </TextBlock>
+                <TextBlock FontSize="14">
+                    <Run Text="Adresse : "/>
+                    <Run Text="{Binding Application.Student.Address}" d:Text="0, rue de l'exemple"/>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,197,0,0">
+                <Label Content="Message au recruteur"/>
+                <Border BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Text="{Binding Application.MessageToRecruiter}" Height="100" Width="329"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid>
+                <Label d:Content="John Doe" Content="{Binding Application.Internship.Company.Name}" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+
+                <StackPanel Margin="60,136,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock FontSize="14">
+                        <Run Text="Téléphone : "/>
+                        <Run Text="{Binding Application.Internship.Company.PhoneNumber}" d:Text="00.00.00.00.00"/>
+                    </TextBlock>
+                    <TextBlock FontSize="14">
+                        <Run Text="Adresse Mail : "/>
+                        <Run Text="{Binding Application.Internship.Company.Email}" d:Text="jdoe@exemple.com"/>
+                    </TextBlock>
+                    <TextBlock FontSize="14">
+                        <Run Text="Adresse : "/>
+                        <Run Text="{Binding Application.Internship.Company.Address}" d:Text="0, rue de l'exemple"/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
 
     </Grid>
 </UserControl>

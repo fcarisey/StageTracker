@@ -11,9 +11,6 @@ namespace StageTracker.ViewModels;
 public partial class BaseViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string _title = string.Empty;
-
-    [ObservableProperty]
     public string _description = string.Empty;
 
     public BaseViewModel() => _description = this.GetType().Name;

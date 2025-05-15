@@ -20,29 +20,33 @@ public partial class CompaniesViewModel : BaseViewModel
     [ObservableProperty]
     private ObservableCollection<Models.Company> _companies;
 
-    private static int _counter;
-
     public CompaniesViewModel(INavigationService navigationService)
     {
-        _counter++;
-        Debug.WriteLine($"CompaniesViewModel instance count: {_counter}");
         _navigationService = navigationService;
-        Companies = new ObservableCollection<Models.Company>
-        {
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-        };
+
+        Models.Student st1 = new() { Id = 1, Address = "6, Rue du beau lièvre", LastName = "Dupont", FirstName = "Alice", Classe = "BTS SIO1", Email = "alice.dupont@example.com", PhoneNumber = "00.00.00.00.00" };
+        Models.Company c1 = new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "companya@gmail.com", Website = "https://www.companya.com" };
+        Models.Intership i1 = new() { Id = 1, Title = "Dévloppeur C#", Description = "Application interne en C#", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), Location = "12, Rue du Val d'amour, 39100 Dole", Student = st1, Company = c1 };
+
+        st1.Internships.Add(i1);
+        c1.Internships.Add(i1);
+
+        Companies =
+        [
+            c1,
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
+        ];
     }
 
     [RelayCommand]
@@ -55,9 +59,9 @@ public partial class CompaniesViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public void ShowCompanyWebsite(string url)
+    public static void ShowCompanyWebsite(string url)
     {
-        ProcessStartInfo psi = new ProcessStartInfo()
+        ProcessStartInfo psi = new ()
         {
             FileName = url,
             UseShellExecute = true

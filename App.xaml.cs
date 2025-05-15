@@ -17,7 +17,7 @@ namespace StageTracker
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ServiceCollection services = new ServiceCollection();
+            ServiceCollection services = new();
 
             services.AddSingleton<IUserSessionService, UserSessionService>();
             services.AddSingleton<INavigationService, NavigationService>();
