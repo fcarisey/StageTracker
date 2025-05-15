@@ -4,11 +4,34 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StageTracker.Views.Teacher"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:behaviors="clr-namespace:StageTracker.Behaviors"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="390" d:DesignWidth="800">
 
     <Grid Background="White">
-        <Label Content="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Candidatures" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox Text="{Binding SearchTerms}" x:Name="TB_Search" HorizontalAlignment="Left" Margin="60,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding OnTextChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
 
+        <DataGrid x:Name="DataGrid" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding FilteredApplications}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="75,106,75,0" MaxHeight="225" MaxWidth="650" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Student.LastName}" Width="*" MinWidth="105" MaxWidth="200"/>
+                <DataGridTextColumn Header="Prénom" Binding="{Binding Student.FirstName}" Width="*" MinWidth="105" MaxWidth="200"/>
+                <DataGridTextColumn Header="Entreprise" Binding="{Binding Internship.Company.Name}" Width="*" MinWidth="105" MaxWidth="220"/>
+                <DataGridTextColumn Header="Statu" Binding="{Binding Status}" Width="SizeToCells"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource VerticalScrollBar}"/>
+            </DataGrid.Resources>
+            <i:Interaction.Behaviors>
+                <behaviors:DataGridUnselectAllOnSelectionChangedBehavior/>
+            </i:Interaction.Behaviors>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -8,7 +8,7 @@ namespace StageTracker.Models;
 
 public class Application
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
     public DateTime AppliedAt { get; set; }
 
     public required string Status { get; set; }
