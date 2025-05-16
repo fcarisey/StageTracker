@@ -11,10 +11,10 @@
 
     <Grid Background="White">
         <Label Content="Candidatures" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox Text="{Binding SearchTerms}" x:Name="TB_Search" HorizontalAlignment="Left" Margin="60,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242">
+        <TextBox x:Name="TB_Search" HorizontalAlignment="Left" Margin="60,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
-                    <i:InvokeCommandAction Command="{Binding OnTextChangedCommand}"/>
+                    <i:InvokeCommandAction Command="{Binding TextChangedCommand}" CommandParameter="{Binding Text, RelativeSource={RelativeSource AncestorType=TextBox}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>

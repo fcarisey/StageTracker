@@ -16,13 +16,10 @@ public partial class ApplicationsViewModel : BaseViewModel
     [ObservableProperty]
     private ICollectionView _filteredApplications;
 
-    [ObservableProperty]
-    private string _searchTerms = string.Empty;
-
     public ApplicationsViewModel()
     {
 
-        Models.Student s1 = new Models.Student()
+        Models.Student s1 = new()
         {
             Id = 1,
             FirstName = "John",
@@ -30,7 +27,7 @@ public partial class ApplicationsViewModel : BaseViewModel
             Email = "jdoe@exemple.com",
         };
 
-        Models.Company c1 = new Models.Company()
+        Models.Company c1 = new()
         {
             Id = 1,
             Name = "Company 1",
@@ -39,7 +36,7 @@ public partial class ApplicationsViewModel : BaseViewModel
             Email = "company@exemple.com",
         };
 
-        Models.Intership i1 = new Models.Intership()
+        Models.Intership i1 = new()
         {
             Id = 1,
             Title = "Stage 1",
@@ -58,23 +55,25 @@ public partial class ApplicationsViewModel : BaseViewModel
         ];
 
         _filteredApplications = CollectionViewSource.GetDefaultView(_applications);
+
     }
 
-
     [RelayCommand]
-    public void OnTextChanged()
+    public void OnTextChanged(string searchTerms)
     {
-        if (!string.IsNullOrEmpty(SearchTerms) && SearchTerms.Length > 0)
+        if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
         {
             FilteredApplications.Filter = x =>
             {
-                var application = x as Models.Application;
-                if (application != null)
+                if (x is Models.Application application)
                 {
-                    return application.Student.FirstName.ToLower().Contains(SearchTerms.ToLower()) ||
-                            application.Student.LastName.ToLower().Contains(SearchTerms.ToLower()) ||
-                            application.Internship.Title.ToLower().Contains(SearchTerms.ToLower()) ||
-                            application.Status.ToLower().Contains(SearchTerms.ToLower());
+                    if (application != null)
+                    {
+                        return application.Student.FirstName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                application.Student.LastName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                application.Internship.Title.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                application.Status.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
+                    }
                 }
 
                 return false;
