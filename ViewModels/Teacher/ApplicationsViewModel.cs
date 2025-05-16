@@ -62,6 +62,7 @@ public partial class ApplicationsViewModel : BaseViewModel
     {
         if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
         {
+            searchTerms = searchTerms.Trim();
             FilteredApplications.Filter = x =>
             {
                 if (x is Models.Application application)

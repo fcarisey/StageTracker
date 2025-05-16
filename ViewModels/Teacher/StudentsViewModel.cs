@@ -43,15 +43,15 @@ public partial class StudentsViewModel : BaseViewModel
             
             st1,
             new() { Id = 2, Address = "6, Rue du beau lièvre", LastName = "Martin", FirstName = "Lucas", Classe = "BTS SIO1", Email = "lucas.martin@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 3, Address = "6, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO2", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 4, Address = "6, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
-            new() { Id = 5, Address = "6, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "BTS SIO1", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" }
+            new() { Id = 3, Address = "7, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Chloé", Classe = "BTS SIO1", Email = "chloe.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 4, Address = "8, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Henri", Classe = "STMG", Email = "henri.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 5, Address = "9, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Emma", Classe = "STMG", Email = "emma.bouchard@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 3, Address = "10, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Pare-brise", Classe = "BTS SIO2", Email = "pare-brise.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 4, Address = "11, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Julien", Classe = "BTS SIO2", Email = "julien.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 5, Address = "12, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Antoine", Classe = "LICENCE LID", Email = "antoine.bouchard@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 3, Address = "13, Rue du beau lièvre", LastName = "Nguyen", FirstName = "Sophie", Classe = "BTS SIO2", Email = "sophie.nguyen@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 4, Address = "14, Rue du beau lièvre", LastName = "Lemoine", FirstName = "Sylvain", Classe = "LICENCE LID", Email = "sylvain.lemoine@example.com", PhoneNumber = "00.00.00.00.00" },
+            new() { Id = 5, Address = "15, Rue du beau lièvre", LastName = "Bouchard", FirstName = "Mark", Classe = "BTS SIO1", Email = "mark.bouchard@example.com", PhoneNumber = "00.00.00.00.00" }
         ];
 
         _navigationService = navigationService;
@@ -75,6 +75,7 @@ public partial class StudentsViewModel : BaseViewModel
     {
         if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
         {
+            searchTerms = searchTerms.Trim();
             FilteredStudents.Filter = x =>
             {
                 if (x is Models.Student student)
