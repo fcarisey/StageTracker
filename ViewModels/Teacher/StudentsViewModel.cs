@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
@@ -17,8 +19,10 @@ namespace StageTracker.ViewModels.Teacher;
 
 public partial class StudentsViewModel : BaseViewModel
 {
-    [ObservableProperty]
     private ObservableCollection<Models.Student> _students;
+
+    [ObservableProperty]
+    private ICollectionView _filteredStudents;
 
     private readonly INavigationService _navigationService;
 
@@ -34,7 +38,7 @@ public partial class StudentsViewModel : BaseViewModel
 
         st1.Applications.Add(a1);
 
-        Students =
+        _students =
         [
             
             st1,
@@ -51,6 +55,7 @@ public partial class StudentsViewModel : BaseViewModel
         ];
 
         _navigationService = navigationService;
+        _filteredStudents = CollectionViewSource.GetDefaultView(_students);
     }
 
     [RelayCommand]
@@ -63,5 +68,36 @@ public partial class StudentsViewModel : BaseViewModel
     public void NavigateToStudentEditView(object student)
     {
         _navigationService.NavigateTo<Views.Teacher.Student.ShowView>(student);
+    }
+
+    [RelayCommand]
+    public void OnTextChanged(string searchTerms)
+    {
+        if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
+        {
+            FilteredStudents.Filter = x =>
+            {
+                if (x is Models.Student student)
+                {
+                    if (student != null)
+                    {
+                        return student.FirstName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                student.LastName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                student.PhoneNumber.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                student.Classe.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                student.Email.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
+                    }
+                }
+
+                return false;
+            };
+
+            FilteredStudents.Refresh();
+        }
+        else
+        {
+            FilteredStudents.Filter = null;
+            FilteredStudents.Refresh();
+        }
     }
 }

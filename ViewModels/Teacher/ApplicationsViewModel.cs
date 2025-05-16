@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
-using System.Windows.Input;
 
 namespace StageTracker.ViewModels.Teacher;
 
@@ -72,7 +71,8 @@ public partial class ApplicationsViewModel : BaseViewModel
                         return application.Student.FirstName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
                                 application.Student.LastName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
                                 application.Internship.Title.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                                application.Status.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
+                                application.Status.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                application.Internship.Company.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
                     }
                 }
 
@@ -85,7 +85,6 @@ public partial class ApplicationsViewModel : BaseViewModel
         {
             FilteredApplications.Filter = null;
             FilteredApplications.Refresh();
-        }
-            
+        }  
     }
 }
