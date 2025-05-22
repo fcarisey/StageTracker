@@ -15,7 +15,9 @@ public class Application
 
     public string? MessageToRecruiter { get; set; }
 
+    public int StudentId { get; set; }
     public required Student Student { get; set; }
 
+    public int InternshipId { get; set; }
     public required Intership Internship { get; set; }
 }

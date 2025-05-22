@@ -48,6 +48,7 @@ public partial class TeachersViewModel : BaseViewModel
     {
         if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
         {
+            searchTerms = searchTerms.Trim();
             FilteredTeachers.Filter = x =>
             {
                 if (x is Models.Teacher teacher)

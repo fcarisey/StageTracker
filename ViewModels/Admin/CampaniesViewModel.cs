@@ -47,6 +47,7 @@ public partial class CampaniesViewModel : BaseViewModel
     {
         if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
         {
+            searchTerms = searchTerms.Trim();
             FilteredCompanies.Filter = x =>
             {
                 if (x is Models.Company company)

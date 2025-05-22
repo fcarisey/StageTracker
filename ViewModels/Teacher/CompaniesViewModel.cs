@@ -26,7 +26,7 @@ public partial class CompaniesViewModel : BaseViewModel
 
     public CompaniesViewModel(INavigationService navigationService)
     {
-        Models.Student st1 = new() { Id = 1, Address = "6, Rue du beau lièvre", LastName = "Dupont", FirstName = "Alice", Classe = "BTS SIO1", Email = "alice.dupont@example.com", PhoneNumber = "00.00.00.00.00" };
+        Models.Student st1 = new() { Id = 1, Address = "6, Rue du beau lièvre", LastName = "Dupont", FirstName = "Alice", Classe = new() { Id = 1, Name = "Classe A" }, Email = "alice.dupont@example.com", PhoneNumber = "00.00.00.00.00" };
         Models.Company c1 = new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "companya@gmail.com", Website = "https://www.companya.com" };
         Models.Intership i1 = new() { Id = 1, Title = "Dévloppeur C#", Description = "Application interne en C#", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), Location = "12, Rue du Val d'amour, 39100 Dole", Student = st1, Company = c1 };
 

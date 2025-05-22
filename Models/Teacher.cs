@@ -14,5 +14,6 @@ public class Teacher
 
     public string FullName => $"{LastName} {FirstName}";
 
+    public int? ClasseId { get; set; }
     public Classe? Classe { get; set; }
 }

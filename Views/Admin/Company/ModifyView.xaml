@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="White">
-        <Label Content="Ajouter une entreprise" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Modifier une entreprise" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="24"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,15,0">

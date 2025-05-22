@@ -43,6 +43,7 @@ public partial class ClassesViewModel : BaseViewModel
     {
         if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
         {
+            searchTerms = searchTerms.Trim();
             FilteredClasses.Filter = x =>
             {
                 if (x is Models.Classe classe)

@@ -38,7 +38,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Student.LastName}" Width="*" MinWidth="105" MaxWidth="200"/>
                 <DataGridTextColumn Header="Prénom" Binding="{Binding Student.FirstName}" Width="*" MinWidth="105" MaxWidth="200"/>
-                <DataGridTextColumn Header="Classe" Binding="{Binding Student.Classe}" Width="SizeToCells" MinWidth="60"/>
+                <DataGridTextColumn Header="Classe" Binding="{Binding Student.Classe.Name}" Width="SizeToCells" MinWidth="60"/>
                 <DataGridTemplateColumn Header="Rapport" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
