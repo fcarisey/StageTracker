@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using StageTracker.ViewModels;
@@ -19,9 +20,13 @@ namespace StageTracker
         {
             ServiceCollection services = new();
 
+            //Services
             services.AddSingleton<IUserSessionService, UserSessionService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IAuthService, AuthService>();
+
+            //Data Services
+            services.AddScoped<Services.Data.StudentDataService>();
 
             services.AddTransient<LoginViewModel>();
 
@@ -73,6 +78,19 @@ namespace StageTracker
             services.AddTransient<MainWindow>();
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<LoginView>();
+
+            services.AddDbContext<Data.DefaultDbContext>(options =>
+                options.UseSqlServer("Server=FREDPO\\SQLEXPRESS01;Database=StageStracker;User Id=StageTracker;Password=812332FFed&;TrustServerCertificate=True;",
+                    sqlOptions => {
+                        sqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 5,
+                            maxRetryDelay: TimeSpan.FromSeconds(10),
+                            errorNumbersToAdd: null
+                        );
+                    }
+                )
+            );
+
 
             ServiceProvider = services.BuildServiceProvider();
 
