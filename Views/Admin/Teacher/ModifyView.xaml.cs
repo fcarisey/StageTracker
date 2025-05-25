@@ -14,4 +14,12 @@ public partial class ModifyView : UserControl, INavigableWithParameter
         InitializeComponent();
         DataContext = vm;
     }
+
+    public void OnNavigatedTo(object parameter)
+    {
+        if (parameter is Models.Teacher teacher)
+        {
+            ((ModifyViewModel)DataContext).OnNavigatedTo(teacher);
+        }
+    }
 }
