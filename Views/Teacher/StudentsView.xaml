@@ -22,7 +22,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding LastName}" Width="*" MinWidth="105" MaxWidth="200"/>
                 <DataGridTextColumn Header="Prénom" Binding="{Binding FirstName}" Width="*" MinWidth="105" MaxWidth="200"/>
-                <DataGridTextColumn Header="Classe" Binding="{Binding Classe.Name}" Width="SizeToCells"/>
+                <DataGridTextColumn Header="Classe" Binding="{Binding Classe.Name}" Width="SizeToCells" MinWidth="50"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" MinWidth="250" MaxWidth="400"/>
                 <DataGridTemplateColumn Header="" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>

@@ -17,7 +17,7 @@
                 </StackPanel>
                 <StackPanel VerticalAlignment="Top" Margin="0,10,0,0">
                     <Label Content="Nom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
-                    <TextBox x:Name="TB_LastName" Text="{Binding FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242"/>
+                    <TextBox x:Name="TB_LastName" Text="{Binding LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242"/>
                 </StackPanel>
             </StackPanel>
 

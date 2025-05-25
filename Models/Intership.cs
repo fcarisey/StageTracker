@@ -13,7 +13,7 @@ public class Intership
     public string Description { get; set; } = string.Empty;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public string Location { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
 
     public int StudentId { get; set; }
     public required Student Student { get; set; }
