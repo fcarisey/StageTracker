@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using StageTracker.Data;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using System.Windows;

@@ -1,11 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace StageTracker.ViewModels.Teacher.Company;
@@ -23,7 +18,7 @@ public partial class ShowViewModel : BaseViewModel, INavigableWithParameter
         }
         else
         {
-            throw new ArgumentException("Parameter must be of type Models.Company", nameof(parameter));
+            throw new ArgumentException("Parameter must be of type Company", nameof(parameter));
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -10,51 +11,26 @@ public partial class ApplicationsViewModel : BaseViewModel
 {
 
     [ObservableProperty]
-    private ObservableCollection<Models.Application> _applications;
+    private ObservableCollection<Models.Application> _applications = default!;
 
     [ObservableProperty]
-    private ICollectionView _filteredApplications;
+    private ICollectionView _filteredApplications = default!;
 
-    public ApplicationsViewModel()
+    private readonly ApplicationDataService _applicationDataService;
+
+    public ApplicationsViewModel(ApplicationDataService applicationDataService)
     {
+        _applicationDataService = applicationDataService;
 
-        Models.Student s1 = new()
-        {
-            Id = 1,
-            FirstName = "John",
-            LastName = "Doe",
-            Email = "jdoe@exemple.com",
-        };
+        _ = LoadApplicationsAsync();
 
-        Models.Company c1 = new()
-        {
-            Id = 1,
-            Name = "Company 1",
-            Address = "Adresse de la société 1",
-            PhoneNumber = "0123456789",
-            Email = "company@exemple.com",
-        };
+    }
 
-        Models.Intership i1 = new()
-        {
-            Id = 1,
-            Title = "Stage 1",
-            Description = "Description du stage 1",
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(30),
-            Company = c1,
-            Student = s1,
-        };
-
-        _applications =
-        [
-            new() {Id = 1, Student = s1, Internship = i1, Status = "Refusé", AppliedAt = DateTime.Now.AddDays(14)},
-            new() {Id = 1, Student = s1, Internship = i1, Status = "Accepté", AppliedAt = DateTime.Now.AddDays(6)},
-            new() {Id = 1, Student = s1, Internship = i1, Status = "En cours", AppliedAt = DateTime.Now},
-        ];
-
-        _filteredApplications = CollectionViewSource.GetDefaultView(_applications);
-
+    private async Task LoadApplicationsAsync()
+    {
+        var applications = await _applicationDataService.GetAllApplicationsAsync();
+        Applications = new ObservableCollection<Models.Application>(applications);
+        FilteredApplications = CollectionViewSource.GetDefaultView(Applications);
     }
 
     [RelayCommand]

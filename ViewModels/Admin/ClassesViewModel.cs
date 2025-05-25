@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
-using StageTracker.Interfaces.ViewModels;
+using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -11,31 +11,29 @@ namespace StageTracker.ViewModels.Admin;
 
 public partial class ClassesViewModel : BaseViewModel
 {
-    private readonly ObservableCollection<Models.Classe> _classes = [];
+    private ObservableCollection<Models.Classe> _classes = [];
 
     [ObservableProperty]
-    private ICollectionView _filteredClasses;
+    private ICollectionView _filteredClasses = default!;
 
     private readonly INavigationService _navigationService;
 
-    public ClassesViewModel(INavigationService navigationService)
-    {
-        _classes =
-        [
-            new () { Id = 1, Name = "Classe A", Teacher = new() { Id = 1, FirstName = "Jean", LastName = "Dupont" } },
-            new () { Id = 2, Name = "Classe B" },
-            new () { Id = 3, Name = "Classe C" },
-            new () { Id = 4, Name = "Classe D" },
-            new () { Id = 5, Name = "Classe E" },
-            new () { Id = 6, Name = "Classe F" },
-            new () { Id = 7, Name = "Classe G" },
-            new () { Id = 8, Name = "Classe H" },
-            new () { Id = 9, Name = "Classe I" },
-            new () { Id = 10, Name = "Classe J" },
-        ];
+    private readonly ClasseDataService _classeDataService;
 
-        _filteredClasses = CollectionViewSource.GetDefaultView(_classes);
+    public ClassesViewModel(INavigationService navigationService, ClasseDataService classeDataService)
+    {
+        _classeDataService = classeDataService;
         _navigationService = navigationService;
+
+        LoadClassesAsync();        
+    }
+
+    private async void LoadClassesAsync()
+    {
+        var classes = await _classeDataService.GetAllClassesAsync();
+
+        _classes = new ObservableCollection<Models.Classe>(classes);
+        FilteredClasses = CollectionViewSource.GetDefaultView(_classes);
     }
 
     [RelayCommand]
@@ -50,7 +48,8 @@ public partial class ClassesViewModel : BaseViewModel
                 {
                     if (classe != null)
                     {
-                        return classe.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
+                        return classe.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) || 
+                               ((classe.Teacher != null) && classe.Teacher.FullName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase));
                     }
                 }
 
@@ -85,7 +84,7 @@ public partial class ClassesViewModel : BaseViewModel
 
         if (result == MessageBoxResult.Yes)
         {
-            // Supression de la bdd
+            _classeDataService.DeleteClasseAsync(classe);
             _classes.Remove(classe);
             FilteredClasses.Refresh();
         }

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
 using StageTracker.Interfaces.ViewModels;
+using StageTracker.Services.Data;
 using System.Windows;
 
 namespace StageTracker.ViewModels.Admin.Company;
@@ -13,9 +14,12 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     [ObservableProperty]
     private Models.Company? _company;
 
-    public ModifyViewModel(INavigationService navigationService)
+    private readonly CompanyDataService _companyDataService;
+
+    public ModifyViewModel(INavigationService navigationService, CompanyDataService companyDataService)
     {
         _navigationService = navigationService;
+        _companyDataService = companyDataService;
     }
 
     public void OnNavigatedTo(object parameter)
@@ -29,8 +33,10 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     [RelayCommand]
     private void ModifyCompany()
     {
-        // Créer un nouvel enseignant dans la base de données
-        MessageBox.Show($"Company modifié avec succès ! {Company?.Name} - {Company?.Email} - {Company?.Website}", "Création d'entreprise", MessageBoxButton.OK, MessageBoxImage.Information);
+        if (Company != null)
+            _companyDataService.UpdateCompanyAsync(Company);
+
+        MessageBox.Show($"Company modifié avec succès ! {Company?.Name} - {Company?.Email} - {Company?.Website}", "Modification d'entreprise", MessageBoxButton.OK, MessageBoxImage.Information);
         _navigationService.NavigateTo<Views.Admin.CompaniesView>();
     }
 }

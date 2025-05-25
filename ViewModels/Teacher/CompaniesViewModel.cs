@@ -1,15 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
-using System;
-using System.Collections.Generic;
+using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Data;
 
@@ -19,39 +15,28 @@ public partial class CompaniesViewModel : BaseViewModel
 {
     private readonly INavigationService _navigationService;
 
-    private readonly ObservableCollection<Models.Company> _companies;
+    private ObservableCollection<Models.Company>? _companies;
 
     [ObservableProperty]
-    private ICollectionView _filteredCompanies;
+    private ICollectionView _filteredCompanies = default!;
 
-    public CompaniesViewModel(INavigationService navigationService)
+    private readonly CompanyDataService _companyDataService;
+
+    public CompaniesViewModel(INavigationService navigationService, CompanyDataService companyDataService)
     {
-        Models.Student st1 = new() { Id = 1, Address = "6, Rue du beau lièvre", LastName = "Dupont", FirstName = "Alice", Classe = new() { Id = 1, Name = "Classe A" }, Email = "alice.dupont@example.com", PhoneNumber = "00.00.00.00.00" };
-        Models.Company c1 = new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "companya@gmail.com", Website = "https://www.companya.com" };
-        Models.Intership i1 = new() { Id = 1, Title = "Dévloppeur C#", Description = "Application interne en C#", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), Location = "12, Rue du Val d'amour, 39100 Dole", Student = st1, Company = c1 };
-
-        st1.Internships.Add(i1);
-        c1.Internships.Add(i1);
-
-        _companies =
-        [
-            c1,
-            new() { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company B", Address = "123 Main St", PhoneNumber = "123-456-7891", Email = "Companyb@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company C", Address = "123 Main St", PhoneNumber = "123-456-7892", Email = "Companyc@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company D", Address = "123 Main St", PhoneNumber = "123-456-7893", Email = "Companyd@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company E", Address = "123 Main St", PhoneNumber = "123-456-7894", Email = "Companye@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company F", Address = "123 Main St", PhoneNumber = "123-456-7895", Email = "Companyf@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company G", Address = "123 Main St", PhoneNumber = "123-456-7896", Email = "Companyg@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company H", Address = "123 Main St", PhoneNumber = "123-456-7897", Email = "Companyh@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company I", Address = "123 Main St", PhoneNumber = "123-456-7898", Email = "Companyi@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company J", Address = "123 Main St", PhoneNumber = "123-456-7899", Email = "Companyj@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company K", Address = "123 Main St", PhoneNumber = "123-456-7900", Email = "Companyk@exemple.com", Website = "https://www.companya.com" },
-            new() { Id = 1, Name = "Company L", Address = "123 Main St", PhoneNumber = "123-456-7901", Email = "Companyl@exemple.com", Website = "https://www.companya.com" },
-        ];
-
+        _companyDataService = companyDataService;
         _navigationService = navigationService;
-        _filteredCompanies = CollectionViewSource.GetDefaultView(_companies);
+
+        _ = LoadCompaniesAsync();
+    }
+
+    private async Task LoadCompaniesAsync()
+    {
+        var companies = await _companyDataService.GetAllCompaniesAsync();
+        if (companies != null)
+            _companies = new ObservableCollection<Models.Company>(companies);
+
+        FilteredCompanies = CollectionViewSource.GetDefaultView(_companies);
     }
 
     [RelayCommand]
@@ -64,15 +49,35 @@ public partial class CompaniesViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public static void ShowCompanyWebsite(string url)
+    public void ShowCompanyWebsite(string url)
     {
-        ProcessStartInfo psi = new ()
-        {
-            FileName = url,
-            UseShellExecute = true
-        };
+        url = url.Trim();
 
-        Process.Start(psi);
+        try
+        {
+            ProcessStartInfo psi = new()
+            {
+                FileName = new Uri(url, UriKind.RelativeOrAbsolute).AbsoluteUri,
+                UseShellExecute = true,
+            };
+
+            Process.Start(psi);
+        }
+        catch (Exception ex) when (ex is InvalidOperationException || ex is UriFormatException || ex is Win32Exception)
+        {
+            MessageBox.Show($"Le lien vers le site web ne correspond pas au format requis ! | {ex.Message}", "Erreur format", MessageBoxButton.OK, MessageBoxImage.Error);
+            _navigationService.NavigateTo<Views.Teacher.CompaniesView>();
+        }
+        catch (PlatformNotSupportedException ex)
+        {
+            MessageBox.Show($"Le système d'exploitation ne supporte pas l'ouverture de liens web ! | {ex.Message}", "Erreur système", MessageBoxButton.OK, MessageBoxImage.Error);
+            _navigationService.NavigateTo<Views.Teacher.CompaniesView>();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Une erreur s'est produite lors de l'ouverture du site web ! | {ex.Message}", "Erreur inconnue", MessageBoxButton.OK, MessageBoxImage.Error);
+            _navigationService.NavigateTo<Views.Teacher.CompaniesView>();
+        }
     }
 
 

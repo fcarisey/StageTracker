@@ -12,5 +12,7 @@ namespace StageTracker.Interfaces.Services
         string Username { get; set; }
         bool IsAdmin { get; set; }
         bool IsTeacher { get; set; }
+
+        int? ClasseId { get; set; }
     }
 }

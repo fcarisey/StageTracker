@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
 using StageTracker.Interfaces.ViewModels;
+using StageTracker.Models;
+using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -17,23 +19,23 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     [ObservableProperty]
     private ObservableCollection<Models.Classe> _classes = [];
 
-    public ModifyViewModel(INavigationService navigationService)
+    private readonly ClasseDataService _classeDataService;
+
+    private readonly StudentDataService _studentDataService;
+
+    public ModifyViewModel(INavigationService navigationService, ClasseDataService classeDataService, StudentDataService studentDataService)
     {
         _navigationService = navigationService;
+        _classeDataService = classeDataService;
+        _studentDataService = studentDataService;
 
-        _classes =
-        [
-            new() { Id = 1, Name = "Classe A" },
-            new() { Id = 2, Name = "Classe B" },
-            new() { Id = 3, Name = "Classe C" },
-            new() { Id = 4, Name = "Classe D" },
-            new() { Id = 5, Name = "Classe E" },
-            new() { Id = 6, Name = "Classe F" },
-            new() { Id = 7, Name = "Classe G" },
-            new() { Id = 8, Name = "Classe H" },
-            new() { Id = 9, Name = "Classe I" },
-            new() { Id = 10, Name = "Classe J" }
-        ];
+        LoadClassesAsync();
+    }
+
+    private async void LoadClassesAsync()
+    {
+        var classes = await _classeDataService.GetAllClassesAsync();
+        Classes = new ObservableCollection<Models.Classe>(classes);
     }
 
     public void OnNavigatedTo(object parameter)
@@ -41,15 +43,16 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
         if (parameter is Models.Student student)
         {
             Student = student;
-            Student.Classe = Classes.FirstOrDefault(c => c.Id == student.Classe?.Id);
         }
     }
 
     [RelayCommand]
     private void ModifyStudent()
     {
-        // Créer un nouvel enseignant dans la base de données
+        if (Student != null)
+            _studentDataService.UpdateStudentAsync(Student);
+
         MessageBox.Show($"Etudiant modifié avec succès ! {Student?.FullName} - {Student?.Email} - {Student?.Classe?.Name}", "Modification d'étudiant", MessageBoxButton.OK, MessageBoxImage.Information);
-        _navigationService.NavigateTo<Views.Admin.CompaniesView>();
+        _navigationService.NavigateTo<Views.Admin.StudentsView>();
     }
 }

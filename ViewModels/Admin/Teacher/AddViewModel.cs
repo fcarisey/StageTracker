@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
 using StageTracker.Interfaces.ViewModels;
+using StageTracker.Services.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,32 +28,38 @@ public partial class AddViewModel : BaseViewModel
     private Models.Classe? _classe;
 
     [ObservableProperty]
-    private ObservableCollection<Models.Classe> _classes = [];
+    private ObservableCollection<Models.Classe> _classes = default!;
 
-    public AddViewModel(INavigationService navigationService)
+    private readonly TeacherDataService _teacherDataService;
+
+    private readonly ClasseDataService _classeDataService;
+
+    public AddViewModel(INavigationService navigationService, TeacherDataService teacherDataService, ClasseDataService classeDataService)
     {
         _navigationService = navigationService;
+        _classeDataService = classeDataService;
+        _teacherDataService = teacherDataService;
 
-        _classes = 
-        [
-            new () { Id = 1, Name = "Classe A" },
-            new () { Id = 2, Name = "Classe B" },
-            new () { Id = 3, Name = "Classe C" },
-            new () { Id = 4, Name = "Classe D" },
-            new () { Id = 5, Name = "Classe E" },
-            new () { Id = 6, Name = "Classe F" },
-            new () { Id = 7, Name = "Classe G" },
-            new () { Id = 8, Name = "Classe H" },
-            new () { Id = 9, Name = "Classe I" },
-            new () { Id = 10, Name = "Classe J" },
-        ];
+        LoadClassesAsync();
+    }
+
+    private async void LoadClassesAsync()
+    {
+        var classes = await _classeDataService.GetAllClassesAsync();
+        Classes = new ObservableCollection<Models.Classe>(classes);
     }
 
     [RelayCommand]
     private void AddTeacher()
     {
-        // Créer un nouvel enseignant dans la base de données
-        MessageBox.Show($"Enseignant créé avec succès ! {FirstName} {LastName} - {Classe.Name}", "Création d'enseignant", MessageBoxButton.OK, MessageBoxImage.Information);
+        _teacherDataService.AddTeacherAsync(new Models.Teacher()
+        {
+            FirstName = FirstName,
+            LastName = LastName,
+            Classe = Classe,
+        });
+
+        MessageBox.Show($"Enseignant créé avec succès ! {FirstName} {LastName} - {Classe?.Name}", "Création d'enseignant", MessageBoxButton.OK, MessageBoxImage.Information);
         _navigationService.NavigateTo<Views.Admin.TeachersView>();
     }
 }

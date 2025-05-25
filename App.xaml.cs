@@ -27,6 +27,10 @@ namespace StageTracker
 
             //Data Services
             services.AddScoped<Services.Data.StudentDataService>();
+            services.AddScoped<Services.Data.ClasseDataService>();
+            services.AddScoped<Services.Data.TeacherDataService>();
+            services.AddScoped<Services.Data.CompanyDataService>();
+            services.AddScoped<Services.Data.ApplicationDataService>();
 
             services.AddTransient<LoginViewModel>();
 
@@ -99,6 +103,7 @@ namespace StageTracker
             INavigationService navigationService = ServiceProvider.GetRequiredService<INavigationService>();
             navigationService.NavigateTo<LoginView>();
 
+            mainWindow.Title = "StageTracker";
             mainWindow.Show();
 
             base.OnStartup(e);

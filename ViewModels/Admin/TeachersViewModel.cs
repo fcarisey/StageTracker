@@ -1,13 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
-using System;
-using System.Collections.Generic;
+using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -15,32 +11,29 @@ namespace StageTracker.ViewModels.Admin;
 
 public partial class TeachersViewModel : BaseViewModel
 {
-    private readonly ObservableCollection<Models.Teacher> _teachers;
+    private ObservableCollection<Models.Teacher> _teachers = default!;
 
     [ObservableProperty]
-    private ICollectionView _filteredTeachers;
+    private ICollectionView _filteredTeachers = default!;
 
     private readonly INavigationService _navigationService;
 
-    public TeachersViewModel(INavigationService navigationService)
+    private readonly TeacherDataService _teacherDataService;
+
+    public TeachersViewModel(INavigationService navigationService, TeacherDataService teacherDataService)
     {
-
-        _teachers = 
-        [
-            new() {Id = 1, LastName = "Dupont", FirstName = "Jean", Classe = new() { Id = 1, Name = "Classe A" } },
-            new() {Id = 2, LastName = "Martin", FirstName = "Marie", Classe = new() { Id = 2, Name = "Classe B" } },
-            new() {Id = 3, LastName = "Durand", FirstName = "Pierre", Classe = new() { Id = 3, Name = "Classe C" } },
-            new() {Id = 4, LastName = "Leroy", FirstName = "Sophie", Classe = new() { Id = 4, Name = "Classe D" } },
-            new() {Id = 5, LastName = "Moreau", FirstName = "Luc", Classe = new() { Id = 5, Name = "Classe E" } },
-            new() {Id = 6, LastName = "Simon", FirstName = "Claire", Classe = new() { Id = 6, Name = "Classe F" } },
-            new() {Id = 7, LastName = "Michel", FirstName = "Julien", Classe = new() { Id = 7, Name = "Classe G" } },
-            new() {Id = 8, LastName = "Lemoine", FirstName = "Alice", Classe = new() { Id = 8, Name = "Classe H" } },
-            new() {Id = 9, LastName = "Garnier", FirstName = "Thomas", Classe = new() { Id = 9, Name = "Classe I" } },
-            new() {Id = 10, LastName = "Rousseau", FirstName = "Emma", Classe = new() { Id = 10, Name = "Classe J" } },
-        ];
-
+        _teacherDataService = teacherDataService;
         _navigationService = navigationService;
-        _filteredTeachers = CollectionViewSource.GetDefaultView(_teachers);
+
+        LoadTeachersAsync();
+    }
+
+    private async void LoadTeachersAsync()
+    {
+        var teachers = await _teacherDataService.GetAllTeachersAsync();
+
+        _teachers = new ObservableCollection<Models.Teacher>(teachers);
+        FilteredTeachers = CollectionViewSource.GetDefaultView(_teachers);
     }
 
     [RelayCommand]
@@ -56,7 +49,7 @@ public partial class TeachersViewModel : BaseViewModel
                     if (teacher != null)
                     {
                         return teacher.FullName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                               ((teacher.Classe is not null) ? teacher.Classe.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) : false);
+                               ((teacher.Classe != null) && teacher.Classe.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase));
                     }
                 }
 
@@ -91,7 +84,7 @@ public partial class TeachersViewModel : BaseViewModel
         
         if (result == MessageBoxResult.Yes)
         {
-            // Supression de la bdd
+            _teacherDataService.DeleteTeacherAsync(teacher);
             _teachers.Remove(teacher);
             FilteredTeachers.Refresh();
         }
