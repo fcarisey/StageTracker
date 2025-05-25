@@ -1,50 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using StageTracker.Data;
+using StageTracker.Helpers;
 using StageTracker.Interfaces.Services;
 
 namespace StageTracker.Services;
 
-public class AuthService : IAuthService
+public class AuthService(IUserSessionService userSessionService, INavigationService navigationService, DefaultDbContext defaultDbContext) : IAuthService
 {
-    private readonly IUserSessionService _userSessionService;
-    private readonly INavigationService _navigationService;
+    private readonly IUserSessionService _userSessionService = userSessionService;
+    private readonly INavigationService _navigationService = navigationService;
+    private readonly DefaultDbContext _defaultDbContext = defaultDbContext;
 
-    public AuthService(IUserSessionService userSessionService, INavigationService navigationService)
+    public async void Authenticate(string username, string password)
     {
-        _userSessionService = userSessionService;
-        _navigationService = navigationService;
-    }
+        Models.User? user = null;
+        try
+        {
+            user = await _defaultDbContext.Users.Include(u => u.Teacher).Where(u => u.Email == username).FirstAsync();
+        }
+        catch (InvalidOperationException ex)
+        {
+            MessageBox.Show($"An error occurred while trying to authenticate. Please try again later. Message : {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
 
-    public void Authenticate(string username, string password)
-    {
-        if (username == "admin" && password == "admin")
+        if (user == null)
         {
-            _userSessionService.IsAdmin = true;
-            _userSessionService.IsTeacher = false;
+            MessageBox.Show("Invalid username or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
         }
-        else if (username == "prof" && password == "prof")
+
+        if (!PasswordHelper.VerifyPasswordHash(password, user.Password, user.Salt))
         {
-            _userSessionService.IsTeacher = true;
-            _userSessionService.IsAdmin = false;
-        }
-        else
-        {
-            MessageBox.Show("Invalid username or password.", "Authentication Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Invalid username or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
         }
 
         _userSessionService.Username = username;
-        
-        
+        _userSessionService.IsAdmin = (bool)user.IsAdmin;
+        _userSessionService.IsTeacher = (bool)user.IsTeacher;
+
         if (_userSessionService.IsAdmin)
         {
             _navigationService.NavigateTo<Views.Admin.ClassesView>();
         }
         else if (_userSessionService.IsTeacher)
         {
+            _userSessionService.ClasseId = user.Teacher?.ClasseId;
             _navigationService.NavigateTo<Views.Teacher.ApplicationsView>();
         }
     }

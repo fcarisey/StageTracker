@@ -1,4 +1,5 @@
-﻿using StageTracker.ViewModels.Teacher.Student.Application;
+﻿using StageTracker.Interfaces.ViewModels;
+using StageTracker.ViewModels.Teacher.Student.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,17 @@ namespace StageTracker.Views.Teacher.Student.Application;
 /// <summary>
 /// Logique d'interaction pour Show.xaml
 /// </summary>
-public partial class ShowView : UserControl
+public partial class ShowView : UserControl, INavigableWithParameter
 {
     public ShowView(ShowViewModel vm)
     {
         InitializeComponent();
         DataContext = vm;
+    }
+
+    public void OnNavigatedTo(object parameter)
+    {
+        if (DataContext is INavigableWithParameter vm)
+            vm.OnNavigatedTo(parameter);
     }
 }

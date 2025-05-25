@@ -1,15 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
-using System;
-using System.Collections.Generic;
+using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using System.Windows;
+using System.Windows.Data;
 
 namespace StageTracker.ViewModels.Teacher;
 
@@ -17,32 +15,28 @@ public partial class CompaniesViewModel : BaseViewModel
 {
     private readonly INavigationService _navigationService;
 
+    private ObservableCollection<Models.Company>? _companies;
+
     [ObservableProperty]
-    private ObservableCollection<Models.Company> _companies;
+    private ICollectionView _filteredCompanies = default!;
 
-    private static int _counter;
+    private readonly CompanyDataService _companyDataService;
 
-    public CompaniesViewModel(INavigationService navigationService)
+    public CompaniesViewModel(INavigationService navigationService, CompanyDataService companyDataService)
     {
-        _counter++;
-        Debug.WriteLine($"CompaniesViewModel instance count: {_counter}");
+        _companyDataService = companyDataService;
         _navigationService = navigationService;
-        Companies = new ObservableCollection<Models.Company>
-        {
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-            new Models.Company { Id = 1, Name = "Company A", Address = "123 Main St", PhoneNumber = "123-456-7890", Email = "Companya@exemple.com", Website = "https://www.companya.com" },
-        };
+
+        _ = LoadCompaniesAsync();
+    }
+
+    private async Task LoadCompaniesAsync()
+    {
+        var companies = await _companyDataService.GetAllCompaniesAsync();
+        if (companies != null)
+            _companies = new ObservableCollection<Models.Company>(companies);
+
+        FilteredCompanies = CollectionViewSource.GetDefaultView(_companies);
     }
 
     [RelayCommand]
@@ -57,12 +51,65 @@ public partial class CompaniesViewModel : BaseViewModel
     [RelayCommand]
     public void ShowCompanyWebsite(string url)
     {
-        ProcessStartInfo psi = new ProcessStartInfo()
-        {
-            FileName = url,
-            UseShellExecute = true
-        };
+        url = url.Trim();
 
-        Process.Start(psi);
+        try
+        {
+            ProcessStartInfo psi = new()
+            {
+                FileName = new Uri(url, UriKind.RelativeOrAbsolute).AbsoluteUri,
+                UseShellExecute = true,
+            };
+
+            Process.Start(psi);
+        }
+        catch (Exception ex) when (ex is InvalidOperationException || ex is UriFormatException || ex is Win32Exception)
+        {
+            MessageBox.Show($"Le lien vers le site web ne correspond pas au format requis ! | {ex.Message}", "Erreur format", MessageBoxButton.OK, MessageBoxImage.Error);
+            _navigationService.NavigateTo<Views.Teacher.CompaniesView>();
+        }
+        catch (PlatformNotSupportedException ex)
+        {
+            MessageBox.Show($"Le système d'exploitation ne supporte pas l'ouverture de liens web ! | {ex.Message}", "Erreur système", MessageBoxButton.OK, MessageBoxImage.Error);
+            _navigationService.NavigateTo<Views.Teacher.CompaniesView>();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Une erreur s'est produite lors de l'ouverture du site web ! | {ex.Message}", "Erreur inconnue", MessageBoxButton.OK, MessageBoxImage.Error);
+            _navigationService.NavigateTo<Views.Teacher.CompaniesView>();
+        }
+    }
+
+
+    [RelayCommand]
+    public void OnTextChanged(string searchTerms)
+    {
+        if (!string.IsNullOrEmpty(searchTerms) && searchTerms.Length > 0)
+        {
+            searchTerms = searchTerms.Trim();
+            FilteredCompanies.Filter = x =>
+            {
+                if (x is Models.Company company)
+                {
+                    if (company != null)
+                    {
+                        return company.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                company.Address.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                company.Email.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                company.PhoneNumber.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                company.PhoneNumber.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
+                    }
+                }
+
+                return false;
+            };
+
+            FilteredCompanies.Refresh();
+        }
+        else
+        {
+            FilteredCompanies.Filter = null;
+            FilteredCompanies.Refresh();
+        }
     }
 }

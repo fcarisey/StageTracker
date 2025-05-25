@@ -1,10 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using StageTracker.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StageTracker.Services
 {
@@ -18,6 +13,8 @@ namespace StageTracker.Services
 
         [ObservableProperty]
         public bool _isTeacher;
+
+        public int? ClasseId { get; set; }
 
         public UserSessionService()
         {

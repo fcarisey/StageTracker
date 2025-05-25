@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using StageTracker.ViewModels;
@@ -17,11 +18,19 @@ namespace StageTracker
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ServiceCollection services = new ServiceCollection();
+            ServiceCollection services = new();
 
+            //Services
             services.AddSingleton<IUserSessionService, UserSessionService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IAuthService, AuthService>();
+
+            //Data Services
+            services.AddScoped<Services.Data.StudentDataService>();
+            services.AddScoped<Services.Data.ClasseDataService>();
+            services.AddScoped<Services.Data.TeacherDataService>();
+            services.AddScoped<Services.Data.CompanyDataService>();
+            services.AddScoped<Services.Data.ApplicationDataService>();
 
             services.AddTransient<LoginViewModel>();
 
@@ -74,6 +83,19 @@ namespace StageTracker
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<LoginView>();
 
+            services.AddDbContext<Data.DefaultDbContext>(options =>
+                options.UseSqlServer("Server=FREDPO\\SQLEXPRESS01;Database=StageStracker;User Id=StageTracker;Password=812332FFed&;TrustServerCertificate=True;",
+                    sqlOptions => {
+                        sqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 5,
+                            maxRetryDelay: TimeSpan.FromSeconds(10),
+                            errorNumbersToAdd: null
+                        );
+                    }
+                )
+            );
+
+
             ServiceProvider = services.BuildServiceProvider();
 
             MainWindow mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
@@ -81,6 +103,7 @@ namespace StageTracker
             INavigationService navigationService = ServiceProvider.GetRequiredService<INavigationService>();
             navigationService.NavigateTo<LoginView>();
 
+            mainWindow.Title = "StageTracker";
             mainWindow.Show();
 
             base.OnStartup(e);

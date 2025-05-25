@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using StageTracker.Data;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using System.Windows;
@@ -20,7 +22,6 @@ public partial class MainWindowViewModel : BaseViewModel
 
     public MainWindowViewModel(IUserSessionService session, INavigationService navigation) 
     {
-        Title = "Main Window";
         Description = "Main Window of the application";
         _session = session;
         _navigation = navigation;

@@ -5,10 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StageTracker.Views.Admin.Classe"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="390" d:DesignWidth="800">
 
     <Grid Background="White">
-        <Label Content="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Ajouter une classe" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,15,0">
+                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,10">
+                    <Label Content="Nom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
+                    <TextBox x:Name="TB_FirstName" Text="{Binding Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="20,0,0,0">
+                <Label Content="Enseignant" FontSize="18"/>
+                <ComboBox x:Name="CB_Classe" ItemsSource="{Binding Teachers}" SelectedItem="{Binding Teacher}" DisplayMemberPath="FullName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF424242"/>
+
+            </StackPanel>
+        </StackPanel>
+        <Button x:Name="BT_Add" Content="Ajouter" Command="{Binding AddClasseCommand}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,250,0,0" Width="100" Height="30" FontSize="18" Background="#FF81DD4A" BorderThickness="0"/>
 
     </Grid>
 </UserControl>
