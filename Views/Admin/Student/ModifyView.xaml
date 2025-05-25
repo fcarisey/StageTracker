@@ -28,8 +28,8 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <StackPanel Margin="5,0,5,0">
-                    <Label Content="Téléphone" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
-                    <TextBox Text="{Binding Student.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" Foreground="#FF424242" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
+                    <Label Content="Nom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
+                    <TextBox Text="{Binding Student.LastName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="160" MaxHeight="25" Height="25" MinHeight="25" MinWidth="160" VerticalContentAlignment="Center" Foreground="#FF424242" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Margin="5,0,5,0">
                     <Label Content="Téléphone" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
