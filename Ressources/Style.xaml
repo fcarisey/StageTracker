@@ -4,5 +4,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DataGrid.xaml"/>
         <ResourceDictionary Source="ScrollBar.xaml"/>
+        <ResourceDictionary Source="RemarkDataTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -31,6 +31,7 @@ namespace StageTracker
             services.AddScoped<Services.Data.TeacherDataService>();
             services.AddScoped<Services.Data.CompanyDataService>();
             services.AddScoped<Services.Data.ApplicationDataService>();
+            services.AddScoped<Services.Data.RemarkDataService>();
 
             services.AddTransient<LoginViewModel>();
 

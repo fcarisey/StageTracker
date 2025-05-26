@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:local="clr-namespace:StageTracker.Behaviors">
+
+    <!-- Readonly remark. -->
+    <DataTemplate x:Key="RemarkReadOnlyDataTemplate">
+        <Border BorderBrush="Black" Padding="3,5,0,0" BorderThickness="0,0,0,0.2" VerticalAlignment="Top">
+            <Grid VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MaxHeight="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{Binding CreatedAt}" Foreground="DarkSlateGray" FontSize="10"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
+                        <Button Command="{Binding DataContext.DeleteRemarkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Content="D" Margin="0,0,5,0" FontSize="7" Width="20" Height="20"/>
+                        <Button Command="{Binding DataContext.EditRemarkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Content="M" Margin="0,0,5,0" FontSize="7" Width="20" Height="20"/>
+                    </StackPanel>
+                </Grid>
+
+                <ScrollViewer x:Name="SV_TB" VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0,5,0,5" MaxHeight="60">
+                    <TextBlock Text="{Binding Message}" Width="215" FontSize="9" TextWrapping="WrapWithOverflow"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <!-- Write remark. -->
+    <DataTemplate x:Key="RemarkWriteDataTemplate">
+        <Border BorderBrush="Black" Padding="3,5,0,0" BorderThickness="0,0,0,0.2" VerticalAlignment="Top">
+            <Grid VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MaxHeight="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{Binding CreatedAt}" Foreground="DarkSlateGray" FontSize="10"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
+                        <Button Command="{Binding DataContext.CancelRemarkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Content="X" Margin="0,0,5,0" FontSize="7" Width="20" Height="20"/>
+                        <Button Command="{Binding DataContext.ValideRemarkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Content="V" Margin="0,0,5,0" FontSize="7" Width="20" Height="20"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBox Text="{Binding Message}" Grid.Row="1" Margin="0,5,2,4" VerticalScrollBarVisibility="Auto" MaxHeight="60" MaxWidth="230" FontSize="9" TextWrapping="WrapWithOverflow" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <local:RemarkDataTemplateSelector x:Key="RemarkDataTemplateSelector" ReadOnlyTemplate="{StaticResource RemarkReadOnlyDataTemplate}" WriteTemplate="{StaticResource RemarkWriteDataTemplate}"/>
+</ResourceDictionary>
