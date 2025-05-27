@@ -5,7 +5,7 @@
 
 # Environement
 .env.dev
-.end.prod
+.env.prod
 
 # User-specific files
 *.rsuser
