@@ -20,12 +20,6 @@ public partial class ShowViewModel : BaseViewModel, INavigableWithParameter
     }
 
     [RelayCommand]
-    public void AddRemark()
-    {
-        MessageBox.Show("Ajout d'une remarque pour " + Application?.Student.FullName);  
-    }
-
-    [RelayCommand]
     public void DownloadCV()
     {
         MessageBox.Show("Téléchargement du CV de " + Application?.Student.FullName);
