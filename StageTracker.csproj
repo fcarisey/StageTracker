@@ -32,6 +32,9 @@
     <None Update=".env.dev">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update=".env.prod">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update=".env.exemple">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
