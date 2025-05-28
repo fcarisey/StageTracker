@@ -28,13 +28,11 @@
                 <Button Grid.Column="1" Content="+" Command="{Binding OpenRemarkCommand}" Height="16" Width="18" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Margin="3,7,0,0"/>
 
                 <StackPanel Orientation="Horizontal" d:Visibility="Visible" Visibility="{Binding IsRemarkShown, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="2,7,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Height="200">
-                    
-                    <Border Grid.Column="0" BorderBrush="Black" Background="Beige" BorderThickness="0.5" CornerRadius="1,1,1,1" Width="240">
-                        <StackPanel>
-                            <ScrollViewer Height="200">
-                                <ItemsControl x:Name="IC_Remarks" ItemTemplateSelector="{StaticResource RemarkDataTemplateSelector}" ItemsSource="{Binding Remarks}" d:ItemsSource="{d:SampleData ItemCount=3}" VerticalAlignment="Top"/>
-                            </ScrollViewer>
-                        </StackPanel>
+
+                    <Border BorderBrush="Black" Background="Beige" BorderThickness="0.5" CornerRadius="1,1,1,1" Width="250">
+                        <ScrollViewer Height="200">
+                            <ItemsControl x:Name="IC_Remarks" ItemTemplateSelector="{StaticResource RemarkDataTemplateSelector}" ItemsSource="{Binding Remarks}" d:ItemsSource="{d:SampleData ItemCount=3}" VerticalAlignment="Top"/>
+                        </ScrollViewer>
                     </Border>
 
                     <StackPanel Grid.Column="1" Orientation="Vertical">
@@ -67,7 +65,7 @@
             </TextBlock>
         </StackPanel>
 
-        <DataGrid IsReadOnly="True" Visibility="{Binding Student.HasApplication, Converter={StaticResource BooleanToVisibilityConverter}}" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Student.Applications}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="300,142,60,0" MaxHeight="225" MaxWidth="900" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
+        <DataGrid IsReadOnly="True" Visibility="{Binding Student.HasApplication, Converter={StaticResource BooleanToVisibilityConverter}}" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Student.Applications}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="300,142,60,0" MaxHeight="225" MaxWidth="400" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Entreprise" Binding="{Binding Internship.Company.Name}" Width="*" MinWidth="105" MaxWidth="115"/>
                 <DataGridTextColumn Header="Statu" Binding="{Binding Status}" Width="*" MinWidth="105" MaxWidth="115"/>

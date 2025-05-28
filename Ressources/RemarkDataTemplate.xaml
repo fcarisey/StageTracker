@@ -2,16 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:local="clr-namespace:StageTracker.Behaviors">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ScrollBar.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <!-- Readonly remark. -->
     <DataTemplate x:Key="RemarkReadOnlyDataTemplate">
         <Border BorderBrush="Black" Padding="3,5,0,0" BorderThickness="0,0,0,0.2" VerticalAlignment="Top">
-            <Grid VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition MaxHeight="60"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
+            <StackPanel VerticalAlignment="Top">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -25,23 +24,22 @@
                     </StackPanel>
                 </Grid>
 
-                <ScrollViewer x:Name="SV_TB" VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0,5,0,5" MaxHeight="60">
+                <ScrollViewer x:Name="SV_TB" VerticalScrollBarVisibility="Auto" Margin="0,5,0,5" MaxHeight="60">
+                    <ScrollViewer.Resources>
+                        <Style TargetType="ScrollBar" BasedOn="{StaticResource RemarkDataTemplateInsideSrollBar}"/>
+                    </ScrollViewer.Resources>
                     <TextBlock Text="{Binding Message}" Width="215" FontSize="9" TextWrapping="WrapWithOverflow"/>
                 </ScrollViewer>
-            </Grid>
+
+            </StackPanel>
         </Border>
     </DataTemplate>
 
     <!-- Write remark. -->
     <DataTemplate x:Key="RemarkWriteDataTemplate">
         <Border BorderBrush="Black" Padding="3,5,0,0" BorderThickness="0,0,0,0.2" VerticalAlignment="Top">
-            <Grid VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition MaxHeight="60"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
+            <StackPanel VerticalAlignment="Top">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -55,9 +53,13 @@
                     </StackPanel>
                 </Grid>
 
-                <TextBox Text="{Binding Message}" Grid.Row="1" Margin="0,5,2,4" VerticalScrollBarVisibility="Auto" MaxHeight="60" MaxWidth="230" FontSize="9" TextWrapping="WrapWithOverflow" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <TextBox Text="{Binding Message}" Grid.Row="1" Margin="0,5,2,4" VerticalScrollBarVisibility="Auto" MaxHeight="60" MaxWidth="230" FontSize="9" TextWrapping="WrapWithOverflow" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <TextBox.Resources>
+                        <Style TargetType="ScrollBar" BasedOn="{StaticResource RemarkDataTemplateInsideSrollBar}"/>
+                    </TextBox.Resources>
+                </TextBox>
 
-            </Grid>
+            </StackPanel>
         </Border>
     </DataTemplate>
 
