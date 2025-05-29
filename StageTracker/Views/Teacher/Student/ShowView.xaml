@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="StageTracker.Views.Teacher.Student.ShowView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StageTracker.Views.Teacher.Student" xmlns:behaviors="clr-namespace:StageTracker.Behaviors" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+      d:DesignHeight="390" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="White">
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Label d:Content="John Doe" Content="{Binding Student.FullName}" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,23,0,0" Height="26" Width="80">
+                    <Label Content="Remarque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" />
+                    <Button Command="{Binding AddRemarkCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,57,0,0" Height="26" Width="130" Grid.RowSpan="1">
+                <Label d:Content="Télécharger le CV:" Content="Télécharger le CV:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <Button Command="{Binding DownloadCVCommand}" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Margin="60,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock FontSize="14">
+                <Run Text="Téléphone : "/>
+                <Run Text="{Binding Student.PhoneNumber}" d:Text="00.00.00.00.00"/>
+            </TextBlock>
+            <TextBlock FontSize="14">
+                <Run Text="Adresse Mail : "/>
+                <Run Text="{Binding Student.Email}" d:Text="jdoe@exemple.com"/>
+            </TextBlock>
+            <TextBlock FontSize="14">
+                <Run Text="Adresse : "/>
+                <Run Text="{Binding Student.Address}" d:Text="0, rue de l'exemple"/>
+            </TextBlock>
+        </StackPanel>
+
+        <DataGrid IsReadOnly="True" Visibility="{Binding Student.HasApplication, Converter={StaticResource BooleanToVisibilityConverter}}" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Student.Applications}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="300,142,60,0" MaxHeight="225" MaxWidth="900" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Entreprise" Binding="{Binding Internship.Company.Name}" Width="*" MinWidth="105" MaxWidth="115"/>
+                <DataGridTextColumn Header="Statu" Binding="{Binding Status}" Width="*" MinWidth="105" MaxWidth="115"/>
+                <DataGridTemplateColumn Header="" MinWidth="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding DataContext.NavigateToStudentApplicationShowViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Content="Détails" Margin="5" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource VerticalScrollBar}"/>
+            </DataGrid.Resources>
+            <i:Interaction.Behaviors>
+                <behaviors:DataGridUnselectAllOnSelectionChangedBehavior/>
+            </i:Interaction.Behaviors>
+        </DataGrid>
+
+    </Grid>
+</UserControl>
