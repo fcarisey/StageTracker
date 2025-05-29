@@ -17,6 +17,7 @@ namespace StageTracker.Services.Data
         {
             return await _context.Students
                                  .Include(s => s.Classe)
+                                 .Include(s => s.Remarks)
                                  .Include(s => s.Applications)
                                     .ThenInclude(a => a.Internship)
                                         .ThenInclude(i => i.Company)

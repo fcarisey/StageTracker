@@ -1,17 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using StageTracker.Data;
 using StageTracker.Interfaces.Services;
-using StageTracker.Services;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace StageTracker.ViewModels;
 
 public partial class MainWindowViewModel : BaseViewModel
-{ 
+{
     [ObservableProperty]
     private IUserSessionService _session;
 
@@ -25,9 +21,10 @@ public partial class MainWindowViewModel : BaseViewModel
         Description = "Main Window of the application";
         _session = session;
         _navigation = navigation;
+
     }
 
-    
+
     [RelayCommand]
     public void NavigateToAdminClassesView() 
     {

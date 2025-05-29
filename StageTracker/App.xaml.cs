@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using StageTracker.ViewModels;
 using StageTracker.Views;
+using System.Diagnostics;
 using System.Windows;
 
 
@@ -18,6 +20,12 @@ namespace StageTracker
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            #if DEBUG
+                Env.Load(".env.dev");
+            #else
+                Env.Load(".env.prod");
+            #endif
+
             ServiceCollection services = new();
 
             //Services
@@ -31,6 +39,7 @@ namespace StageTracker
             services.AddScoped<Services.Data.TeacherDataService>();
             services.AddScoped<Services.Data.CompanyDataService>();
             services.AddScoped<Services.Data.ApplicationDataService>();
+            services.AddScoped<Services.Data.RemarkDataService>();
 
             services.AddTransient<LoginViewModel>();
 
@@ -84,7 +93,7 @@ namespace StageTracker
             services.AddTransient<LoginView>();
 
             services.AddDbContext<Data.DefaultDbContext>(options =>
-                options.UseSqlServer("Server=FREDPO\\SQLEXPRESS01;Database=StageStracker;User Id=StageTracker;Password=812332FFed&;TrustServerCertificate=True;",
+                options.UseSqlServer($"Server={Env.GetString("DB_SERVER")};Database={Env.GetString("DB_DATABASE")};User Id={Env.GetString("DB_USER")};Password={Env.GetString("DB_PASSWORD")};TrustServerCertificate=True;",
                     sqlOptions => {
                         sqlOptions.EnableRetryOnFailure(
                             maxRetryCount: 5,
