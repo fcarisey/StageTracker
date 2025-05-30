@@ -5,7 +5,6 @@ using StageTracker.Interfaces.Services;
 using StageTracker.Services;
 using StageTracker.ViewModels;
 using StageTracker.Views;
-using System.Diagnostics;
 using System.Windows;
 
 

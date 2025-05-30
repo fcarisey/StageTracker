@@ -1,6 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using StageTrackerAPI.Data;
+using StageTrackerAPI.Interfaces.Services;
+using StageTrackerAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddSingleton<IUserSessionService, UserSessionService>();
+
+
+builder.Services.AddDbContext<DefaultDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
