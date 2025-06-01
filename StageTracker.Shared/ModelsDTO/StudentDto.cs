@@ -5,6 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StageTrackerAPI.ModelsDto;
+namespace StageTracker.Shared.ModelsDto;
 
 public record StudentDto(int Id);
