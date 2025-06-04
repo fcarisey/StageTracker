@@ -1,7 +1,15 @@
 ﻿@inherits LayoutComponentBase
+
 <div class="page">
     <div class="sidebar">
-        <NavMenu />
+        @if (role == Shared.Enum.ERoles.COMPANY)
+        {
+            <StageTracker.Web.Layout.Company.CompanyNavMenu />
+        }
+        else if (role == Shared.Enum.ERoles.STUDENT)
+        {
+            <StageTracker.Web.Layout.Student.StudentNavMenu />
+        }
     </div>
 
     <main>
@@ -14,3 +22,7 @@
         </article>
     </main>
 </div>
+
+@code{
+    const Shared.Enum.ERoles role = Shared.Enum.ERoles.STUDENT; // company or student
+}

@@ -39,8 +39,19 @@ public class AuthService(IUserSessionService userSessionService, INavigationServ
         }
 
         _userSessionService.Username = username;
-        _userSessionService.IsAdmin = (bool)user.IsAdmin;
-        _userSessionService.IsTeacher = (bool)user.IsTeacher;
+
+        if (user.IsAdmin)
+            {
+            _userSessionService.Role = Shared.Enum.ERoles.ADMIN;
+        }
+        else if (user.IsTeacher)
+        {
+            _userSessionService.Role = Shared.Enum.ERoles.TEACHER;
+        }
+        else
+        {
+            _userSessionService.Role = Shared.Enum.ERoles.UNKNOWN;
+        }
 
         if (_userSessionService.IsAdmin)
         {
@@ -56,6 +67,7 @@ public class AuthService(IUserSessionService userSessionService, INavigationServ
     public void Logout()
     {
         _userSessionService.Username = string.Empty;
+        _userSessionService.Role = Shared.Enum.ERoles.UNASSIGNED;
         _userSessionService.IsAdmin = false;
         _userSessionService.IsTeacher = false;
         _navigationService.NavigateTo<Views.LoginView>();
