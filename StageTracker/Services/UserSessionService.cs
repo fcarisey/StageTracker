@@ -32,6 +32,7 @@ namespace StageTracker.Services
         public UserSessionService()
         {
             Username = string.Empty;
+            Role = ERoles.UNASSIGNED;
             IsAdmin = false;
             IsTeacher = false;
         }
