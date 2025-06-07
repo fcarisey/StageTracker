@@ -1,0 +1,28 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        @if (role == Shared.Enum.ERoles.COMPANY)
+        {
+            <StageTracker.Web.Layout.Company.CompanyNavMenu />
+        }
+        else if (role == Shared.Enum.ERoles.STUDENT)
+        {
+            <StageTracker.Web.Layout.Student.StudentNavMenu />
+        }
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code{
+    const Shared.Enum.ERoles role = Shared.Enum.ERoles.STUDENT; // company or student
+}

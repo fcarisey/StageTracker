@@ -12,7 +12,7 @@ namespace StageTracker.ViewModels.Teacher.Student;
 public partial class ShowViewModel(INavigationService navigationService, RemarkDataService remarkDataService) : BaseViewModel, INavigableWithParameter
 {
     [ObservableProperty]
-    private Models.Student _student = default!;
+    private Shared.ModelsEF.Student _student = default!;
 
     [ObservableProperty]
     private ICollectionView _remarks = default!;
@@ -26,11 +26,11 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Student student)
+        if (parameter is Shared.ModelsEF.Student student)
         {
             Student = student;
             Remarks = CollectionViewSource.GetDefaultView(Student.Remarks);
-        } 
+        }
         else
             _navigationService.NavigateTo<Views.Teacher.StudentsView>();
     }
@@ -56,11 +56,11 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
     [RelayCommand]
     public void NewRemark()
     {
-        Student.Remarks.Add(new Models.Remark
+        Student.Remarks.Add(new Shared.ModelsEF.Remark
         {
             Message = "Nouvelle remarque",
             CreatedAt = DateTime.Now,
-            StudentId = Student.Id,
+            Student = Student,
             IsEditing = true
         });
         
@@ -68,7 +68,7 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
     }
 
     [RelayCommand]
-    public void EditRemark(Models.Remark remark)
+    public void EditRemark(Shared.ModelsEF.Remark remark)
     {
         if (remark is null) return;
 
@@ -78,7 +78,7 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
     }
 
     [RelayCommand]
-    public void DeleteRemark(Models.Remark remark)
+    public void DeleteRemark(Shared.ModelsEF.Remark remark)
     {
         if (remark is null) return;
 
@@ -91,7 +91,7 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
     }
 
     [RelayCommand]
-    public void ValideRemark(Models.Remark remark)
+    public void ValideRemark(Shared.ModelsEF.Remark remark)
     {
         remark.IsEditing = false;
 
@@ -104,7 +104,7 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
     }
 
     [RelayCommand]
-    public void CancelRemark(Models.Remark remark)
+    public void CancelRemark(Shared.ModelsEF.Remark remark)
     {
         if (remark.Id == null) Student.Remarks.Remove(remark);
         else
@@ -117,7 +117,7 @@ public partial class ShowViewModel(INavigationService navigationService, RemarkD
     }
 
     [RelayCommand]
-    public void NavigateToStudentApplicationShowView(Models.Application application)
+    public void NavigateToStudentApplicationShowView(Shared.ModelsEF.Application application)
     {
         if (Student.HasApplication)
         {

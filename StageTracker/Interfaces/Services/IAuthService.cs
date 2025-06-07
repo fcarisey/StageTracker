@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-
-namespace StageTracker.Interfaces.Services;
+﻿namespace StageTracker.Interfaces.Services;
 
 public interface IAuthService
 {

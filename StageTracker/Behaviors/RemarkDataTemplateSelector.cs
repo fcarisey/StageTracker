@@ -10,7 +10,7 @@ public class RemarkDataTemplateSelector : DataTemplateSelector
 
     public override DataTemplate SelectTemplate(object item, DependencyObject container)
     {
-        if (item is Models.Remark remark)
+        if (item is Shared.ModelsEF.Remark remark)
             return (remark.IsEditing) ? WriteTemplate : ReadOnlyTemplate;
 
         // Fallback to a default template if no match is found

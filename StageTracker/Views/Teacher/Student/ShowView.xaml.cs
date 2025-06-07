@@ -1,11 +1,6 @@
 ﻿using StageTracker.Interfaces.ViewModels;
-using StageTracker.Models;
 using StageTracker.ViewModels.Teacher.Student;
-using System;
-using System.Collections.Generic;
-using System.Security.AccessControl;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace StageTracker.Views.Teacher.Student;
 

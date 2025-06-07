@@ -2,12 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services.Data;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace StageTracker.ViewModels.Admin.Classe;
@@ -20,10 +15,10 @@ public partial class AddViewModel : BaseViewModel
     private string _name = string.Empty;
 
     [ObservableProperty]
-    private Models.Teacher? _teacher;
+    private Shared.ModelsEF.Teacher? _teacher;
 
     [ObservableProperty]
-    private ObservableCollection<Models.Teacher> _teachers = [];
+    private ObservableCollection<Shared.ModelsEF.Teacher> _teachers = [];
 
     private readonly ClasseDataService _classeDataService;
 
@@ -41,13 +36,13 @@ public partial class AddViewModel : BaseViewModel
     private async void LoadTeachersAsync()
     {
         var teachers = await _teacherDataService.GetAllTeachersAsync();
-        Teachers = new ObservableCollection<Models.Teacher>(teachers);
+        Teachers = new ObservableCollection<Shared.ModelsEF.Teacher>(teachers);
     }
 
     [RelayCommand]
     private void AddClasse()
     {
-        _classeDataService.AddClasseAsync(new Models.Classe
+        _classeDataService.AddClasseAsync(new Shared.ModelsEF.Classe
         {
             Name = Name,
             Teacher = Teacher

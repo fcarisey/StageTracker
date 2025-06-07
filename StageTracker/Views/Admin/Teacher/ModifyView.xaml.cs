@@ -17,7 +17,7 @@ public partial class ModifyView : UserControl, INavigableWithParameter
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Teacher teacher)
+        if (parameter is Shared.ModelsEF.Teacher teacher)
         {
             ((ModifyViewModel)DataContext).OnNavigatedTo(teacher);
         }

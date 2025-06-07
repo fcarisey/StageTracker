@@ -4,14 +4,13 @@ using StageTracker.Interfaces.Services;
 using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Data;
 
 namespace StageTracker.ViewModels.Teacher;
 
 public partial class StudentsViewModel : BaseViewModel
 {
-    private ObservableCollection<Models.Student> _students = [];
+    private ObservableCollection<Shared.ModelsEF.Student> _students = [];
 
     [ObservableProperty]
     private ICollectionView _filteredStudents = default!;
@@ -41,7 +40,7 @@ public partial class StudentsViewModel : BaseViewModel
         if (students == null)
             return;
 
-        _students = new ObservableCollection<Models.Student>(students);
+        _students = new ObservableCollection<Shared.ModelsEF.Student>(students);
 
         FilteredStudents = CollectionViewSource.GetDefaultView(_students);
         FilteredStudents.Refresh();
@@ -67,7 +66,7 @@ public partial class StudentsViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredStudents.Filter = x =>
             {
-                if (x is Models.Student student)
+                if (x is Shared.ModelsEF.Student student)
                 {
                     if (student != null)
                     {

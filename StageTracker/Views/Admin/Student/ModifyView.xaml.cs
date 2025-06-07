@@ -17,7 +17,7 @@ public partial class ModifyView : UserControl, INavigableWithParameter
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Student student)
+        if (parameter is Shared.ModelsEF.Student student)
             ((ModifyViewModel)DataContext).OnNavigatedTo(student);
         else
             throw new ArgumentException("Parameter must be a Student", nameof(parameter));

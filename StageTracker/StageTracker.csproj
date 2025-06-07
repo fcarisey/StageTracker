@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StageTracker.Shared\StageTracker.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update=".env.dev">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

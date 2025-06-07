@@ -1,9 +1,9 @@
-﻿using System.Security.Cryptography;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using StageTracker.Data;
 using StageTracker.Helpers;
 using StageTracker.Interfaces.Services;
+using StageTracker.Shared.ModelsEF;
 
 namespace StageTracker.Services;
 
@@ -15,7 +15,7 @@ public class AuthService(IUserSessionService userSessionService, INavigationServ
 
     public async void Authenticate(string username, string password)
     {
-        Models.User? user = null;
+        User? user = null;
         try
         {
             user = await _defaultDbContext.Users.Include(u => u.Teacher).Where(u => u.Email == username).FirstAsync();
@@ -39,8 +39,19 @@ public class AuthService(IUserSessionService userSessionService, INavigationServ
         }
 
         _userSessionService.Username = username;
-        _userSessionService.IsAdmin = (bool)user.IsAdmin;
-        _userSessionService.IsTeacher = (bool)user.IsTeacher;
+
+        if (user.IsAdmin)
+            {
+            _userSessionService.Role = Shared.Enum.ERoles.ADMIN;
+        }
+        else if (user.IsTeacher)
+        {
+            _userSessionService.Role = Shared.Enum.ERoles.TEACHER;
+        }
+        else
+        {
+            _userSessionService.Role = Shared.Enum.ERoles.UNKNOWN;
+        }
 
         if (_userSessionService.IsAdmin)
         {
@@ -56,6 +67,7 @@ public class AuthService(IUserSessionService userSessionService, INavigationServ
     public void Logout()
     {
         _userSessionService.Username = string.Empty;
+        _userSessionService.Role = Shared.Enum.ERoles.UNASSIGNED;
         _userSessionService.IsAdmin = false;
         _userSessionService.IsTeacher = false;
         _navigationService.NavigateTo<Views.LoginView>();

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
-using StageTracker.Models;
 using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +12,7 @@ namespace StageTracker.ViewModels.Admin;
 
 public partial class StudentsViewModel : BaseViewModel
 {
-    private ObservableCollection<Models.Student> _students = [];
+    private ObservableCollection<Shared.ModelsEF.Student> _students = [];
 
     [ObservableProperty]
     private ICollectionView _filteredStudents = default!;
@@ -32,7 +31,6 @@ public partial class StudentsViewModel : BaseViewModel
 
     public async void LoadStudentsAsync()
     {
-
         try
         {
             var students = await _studentDataService.GetAllStudentsAsync();
@@ -44,7 +42,7 @@ public partial class StudentsViewModel : BaseViewModel
             }
 
             _students.Clear();
-            _students = new ObservableCollection<Models.Student>(students);
+            _students = new ObservableCollection<Shared.ModelsEF.Student>(students);
 
             FilteredStudents = CollectionViewSource.GetDefaultView(_students);
             FilteredStudents.Refresh();
@@ -64,7 +62,7 @@ public partial class StudentsViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredStudents.Filter = x =>
             {
-                if (x is Models.Student student)
+                if (x is Shared.ModelsEF.Student student)
                 {
                     if (student != null)
                     {
@@ -92,13 +90,13 @@ public partial class StudentsViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public void ModifyStudent(Models.Student student)
+    public void ModifyStudent(Shared.ModelsEF.Student student)
     {
         _navigationService.NavigateTo<Views.Admin.Student.ModifyView>(student);
     }
 
     [RelayCommand]
-    public void DeleteStudent(Models.Student student)
+    public void DeleteStudent(Shared.ModelsEF.Student student)
     {
         MessageBoxResult result = MessageBox.Show($"Voulez-vous vraiment supprimer {student.FullName}", "Suppression d'étudiant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

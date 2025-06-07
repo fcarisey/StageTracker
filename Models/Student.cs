@@ -23,12 +23,8 @@ public class Student
 
     public Collection<Application> Applications { get; set; } = [];
 
-    public Collection<Remark> Remarks { get; set; } = [];
-
     public bool HasInternship => Internships.Count > 0;
 
     public bool HasApplication => Applications.Count > 0;
-
-    public bool HasRemark => Remarks.Count > 0;
 
 }

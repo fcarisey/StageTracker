@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
 using StageTracker.Interfaces.ViewModels;
-using StageTracker.Models;
 using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -14,10 +13,10 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     private readonly INavigationService _navigationService;
 
     [ObservableProperty]
-    private Models.Student? _student;
+    private Shared.ModelsEF.Student? _student;
 
     [ObservableProperty]
-    private ObservableCollection<Models.Classe> _classes = [];
+    private ObservableCollection<Shared.ModelsEF.Classe> _classes = [];
 
     private readonly ClasseDataService _classeDataService;
 
@@ -35,12 +34,12 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     private async void LoadClassesAsync()
     {
         var classes = await _classeDataService.GetAllClassesAsync();
-        Classes = new ObservableCollection<Models.Classe>(classes);
+        Classes = new ObservableCollection<Shared.ModelsEF.Classe>(classes);
     }
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Student student)
+        if (parameter is Shared.ModelsEF.Student student)
         {
             Student = student;
         }

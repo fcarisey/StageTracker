@@ -13,10 +13,10 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     private readonly INavigationService _navigationService;
 
     [ObservableProperty]
-    private Models.Teacher _teacher = default!;
+    private Shared.ModelsEF.Teacher _teacher = default!;
 
     [ObservableProperty]
-    private ObservableCollection<Models.Classe> _classes = [];
+    private ObservableCollection<Shared.ModelsEF.Classe> _classes = [];
 
     private readonly ClasseDataService _classeDataService;
 
@@ -34,12 +34,12 @@ public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
     private async void LoadClassesAsync()
     {
         var classes = await _classeDataService.GetAllClassesAsync();
-        Classes = new ObservableCollection<Models.Classe>(classes);
+        Classes = new ObservableCollection<Shared.ModelsEF.Classe>(classes);
     }
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Teacher teacher)
+        if (parameter is Shared.ModelsEF.Teacher teacher)
         {
             Teacher = teacher;
         }
