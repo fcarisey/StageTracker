@@ -16,10 +16,6 @@ public class Student
 
     public List<Internship> Internships { get; set; } = [];
 
-<<<<<<<< HEAD:StageTracker/Models/Student.cs
-    public Collection<Remark> Remarks { get; set; } = [];
-
-========
     public List<Application> Applications { get; set; } = [];
 
     public List<Remark> Remarks { get; set; } = [];
@@ -28,16 +24,12 @@ public class Student
     public string FullName => $"{FirstName} {LastName}";
 
     [NotMapped]
->>>>>>>> features:StageTracker.Shared/ModelsEF/Student.cs
     public bool HasInternship => Internships.Count > 0;
 
     [NotMapped]
     public bool HasApplication => Applications.Count > 0;
 
-<<<<<<<< HEAD:StageTracker/Models/Student.cs
-========
     [NotMapped]
->>>>>>>> features:StageTracker.Shared/ModelsEF/Student.cs
     public bool HasRemark => Remarks.Count > 0;
 
 }
