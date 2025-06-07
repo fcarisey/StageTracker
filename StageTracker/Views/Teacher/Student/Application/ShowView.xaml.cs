@@ -1,5 +1,5 @@
-﻿using StageTracker.Interfaces.ViewModels;
-using StageTracker.ViewModels.Teacher.Student.Application;
+﻿using StageTracker.WPF.Interfaces.ViewModels;
+using StageTracker.WPF.ViewModels.Teacher.Student.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StageTracker.Views.Teacher.Student.Application;
+namespace StageTracker.WPF.Views.Teacher.Student.Application;
 
 /// <summary>
 /// Logique d'interaction pour Show.xaml

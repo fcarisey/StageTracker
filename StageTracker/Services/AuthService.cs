@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 using Microsoft.EntityFrameworkCore;
-using StageTracker.Data;
-using StageTracker.Helpers;
-using StageTracker.Interfaces.Services;
+using StageTracker.WPF.Data;
+using StageTracker.WPF.Helpers;
+using StageTracker.WPF.Interfaces.Services;
 using StageTracker.Shared.ModelsEF;
 
-namespace StageTracker.Services;
+namespace StageTracker.WPF.Services;
 
 public class AuthService(IUserSessionService userSessionService, INavigationService navigationService, DefaultDbContext defaultDbContext) : IAuthService
 {

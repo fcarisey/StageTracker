@@ -1,6 +1,6 @@
-﻿using StageTrackerAPI.Interfaces.Services;
+﻿using StageTracker.API.Interfaces.Services;
 
-namespace StageTrackerAPI.Services
+namespace StageTracker.API.Services
 {
     public partial class UserSessionService : IUserSessionService
     {

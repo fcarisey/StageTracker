@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.Services;
-using StageTracker.Services.Data;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Services.Data;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace StageTracker.ViewModels.Admin.Classe;
+namespace StageTracker.WPF.ViewModels.Admin.Classe;
 
 public partial class AddViewModel : BaseViewModel
 {

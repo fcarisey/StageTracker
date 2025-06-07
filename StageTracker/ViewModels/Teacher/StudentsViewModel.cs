@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.Services;
-using StageTracker.Services.Data;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
-namespace StageTracker.ViewModels.Teacher;
+namespace StageTracker.WPF.ViewModels.Teacher;
 
 public partial class StudentsViewModel : BaseViewModel
 {

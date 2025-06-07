@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StageTrackerAPI.Data;
-using StageTrackerAPI.Models;
+using StageTracker.API.Data;
+using StageTracker.Shared.ModelsEF;
 
-namespace StageTrackerAPI.Services.Data
+namespace StageTracker.API.Services.Data
 {
     public class StudentDataService(DefaultDbContext context)
     {

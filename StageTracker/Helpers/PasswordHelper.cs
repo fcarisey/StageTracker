@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace StageTracker.Helpers;
+namespace StageTracker.WPF.Helpers;
 
 public static class PasswordHelper
 {

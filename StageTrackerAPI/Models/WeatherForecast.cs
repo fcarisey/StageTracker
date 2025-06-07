@@ -1,4 +1,4 @@
-namespace StageTrackerAPI.Models
+namespace StageTracker.API.Models
 {
     public class WeatherForecast
     {

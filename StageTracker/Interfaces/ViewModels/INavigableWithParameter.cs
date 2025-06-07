@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StageTracker.Interfaces.ViewModels;
+namespace StageTracker.WPF.Interfaces.ViewModels;
 
 public interface INavigableWithParameter
 {

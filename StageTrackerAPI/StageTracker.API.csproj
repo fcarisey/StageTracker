@@ -20,4 +20,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StageTracker.Shared\StageTracker.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

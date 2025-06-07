@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 
 
-namespace StageTracker.Behaviors;
+namespace StageTracker.WPF.Behaviors;
 
 class DataGridUnselectAllOnSelectionChangedBehavior : Behavior<DataGrid>
 {

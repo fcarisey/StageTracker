@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.Services;
-using StageTracker.Interfaces.ViewModels;
-using StageTracker.Services.Data;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Interfaces.ViewModels;
+using StageTracker.WPF.Services.Data;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace StageTracker.ViewModels.Admin.Teacher;
+namespace StageTracker.WPF.ViewModels.Admin.Teacher;
 
 public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
 {

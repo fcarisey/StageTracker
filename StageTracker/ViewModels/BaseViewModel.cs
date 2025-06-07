@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace StageTracker.ViewModels;
+namespace StageTracker.WPF.ViewModels;
 
 public partial class BaseViewModel : ObservableObject
 {

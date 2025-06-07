@@ -1,8 +1,8 @@
-﻿using StageTracker.Interfaces.ViewModels;
-using StageTracker.ViewModels.Teacher.Company;
+﻿using StageTracker.WPF.Interfaces.ViewModels;
+using StageTracker.WPF.ViewModels.Teacher.Company;
 using System.Windows.Controls;
 
-namespace StageTracker.Views.Teacher.Company;
+namespace StageTracker.WPF.Views.Teacher.Company;
 
 /// <summary>
 /// Logique d'interaction pour Show.xaml

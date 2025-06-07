@@ -1,7 +1,7 @@
-﻿using StageTracker.ViewModels.Admin;
+﻿using StageTracker.WPF.ViewModels.Admin;
 using System.Windows.Controls;
 
-namespace StageTracker.Views.Admin;
+namespace StageTracker.WPF.Views.Admin;
 
 /// <summary>
 /// Logique d'interaction pour Students.xaml

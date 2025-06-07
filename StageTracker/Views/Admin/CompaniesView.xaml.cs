@@ -1,4 +1,4 @@
-﻿using StageTracker.ViewModels.Admin;
+﻿using StageTracker.WPF.ViewModels.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StageTracker.Views.Admin;
+namespace StageTracker.WPF.Views.Admin;
 
 /// <summary>
 /// Logique d'interaction pour Companies.xaml

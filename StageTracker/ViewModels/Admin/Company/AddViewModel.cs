@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.Services;
-using StageTracker.Services.Data;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Services.Data;
 using System.Windows;
 
-namespace StageTracker.ViewModels.Admin.Company;
+namespace StageTracker.WPF.ViewModels.Admin.Company;
 
 public partial class AddViewModel(INavigationService navigationService, CompanyDataService companyDataService) : BaseViewModel
 {

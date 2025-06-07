@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using StageTrackerAPI.Data;
-using StageTrackerAPI.Interfaces.Services;
-using StageTrackerAPI.Services;
+using StageTracker.API.Data;
+using StageTracker.API.Interfaces.Services;
+using StageTracker.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

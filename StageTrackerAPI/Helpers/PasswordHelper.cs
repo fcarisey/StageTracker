@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StageTrackerAPI.Helpers;
+namespace StageTracker.API.Helpers;
 
 public static class PasswordHelper
 {

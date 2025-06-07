@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.Services;
-using StageTracker.Interfaces.ViewModels;
-using StageTracker.Services.Data;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Interfaces.ViewModels;
+using StageTracker.WPF.Services.Data;
 
-namespace StageTracker.ViewModels.Teacher.Student;
+namespace StageTracker.WPF.ViewModels.Teacher.Student;
 
 public partial class ShowViewModel(INavigationService navigationService, RemarkDataService remarkDataService) : BaseViewModel, INavigableWithParameter
 {

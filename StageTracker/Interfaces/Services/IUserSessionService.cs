@@ -1,6 +1,6 @@
 ﻿using StageTracker.Shared.Enum;
 
-namespace StageTracker.Interfaces.Services
+namespace StageTracker.WPF.Interfaces.Services
 {
     public interface IUserSessionService
     {

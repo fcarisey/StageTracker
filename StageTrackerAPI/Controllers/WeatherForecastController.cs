@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using StageTrackerAPI.Models;
+using StageTracker.API.Models;
 
-namespace StageTrackerAPI.Controllers
+namespace StageTracker.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

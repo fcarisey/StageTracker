@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.Services;
+using StageTracker.WPF.Interfaces.Services;
 
-namespace StageTracker.ViewModels;
+namespace StageTracker.WPF.ViewModels;
 
 public partial class LoginViewModel : BaseViewModel
 {

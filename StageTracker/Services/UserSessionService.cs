@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using StageTracker.Interfaces.Services;
+using StageTracker.WPF.Interfaces.Services;
 using StageTracker.Shared.Enum;
 
-namespace StageTracker.Services
+namespace StageTracker.WPF.Services
 {
     public partial class UserSessionService : ObservableObject, IUserSessionService
     {

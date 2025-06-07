@@ -1,8 +1,8 @@
-﻿using StageTracker.Interfaces.ViewModels;
-using StageTracker.ViewModels.Admin.Company;
+﻿using StageTracker.WPF.Interfaces.ViewModels;
+using StageTracker.WPF.ViewModels.Admin.Company;
 using System.Windows.Controls;
 
-namespace StageTracker.Views.Admin.Company;
+namespace StageTracker.WPF.Views.Admin.Company;
 
 /// <summary>
 /// Logique d'interaction pour Modify.xaml

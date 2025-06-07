@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StageTrackerAPI.Interfaces.Services
+namespace StageTracker.API.Interfaces.Services
 {
     public interface IUserSessionService
     {

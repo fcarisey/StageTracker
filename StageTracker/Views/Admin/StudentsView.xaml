@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="StageTracker.Views.Admin.StudentsView"
+﻿<UserControl x:Class="StageTracker.WPF.Views.Admin.StudentsView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:StageTracker.Views.Admin" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:behaviors="clr-namespace:StageTracker.Behaviors"
+      xmlns:local="clr-namespace:StageTracker.WPF.Views.Admin" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:behaviors="clr-namespace:StageTracker.WPF.Behaviors"
              mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 

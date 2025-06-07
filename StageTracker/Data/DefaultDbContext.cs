@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StageTracker.Shared.ModelsEF;
 
-namespace StageTracker.Data;
+namespace StageTracker.WPF.Data;
 
 public class DefaultDbContext : DbContext
 {

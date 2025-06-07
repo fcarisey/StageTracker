@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
-using StageTrackerAPI.Data;
-using StageTrackerAPI.Helpers;
-using StageTrackerAPI.Interfaces.Services;
+using StageTracker.API.Data;
+using StageTracker.API.Helpers;
+using StageTracker.API.Interfaces.Services;
 
-namespace StageTrackerAPI.Services;
+namespace StageTracker.API.Services;
 
 public class AuthService(IUserSessionService userSessionService, DefaultDbContext defaultDbContext) : IAuthService
 {

@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
-using StageTracker.Interfaces.Services;
-using StageTracker.Interfaces.ViewModels;
-using StageTracker.ViewModels;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Interfaces.ViewModels;
+using StageTracker.WPF.ViewModels;
 
-namespace StageTracker.Services;
+namespace StageTracker.WPF.Services;
 
 public class NavigationService(IServiceProvider provider) : INavigationService
 {

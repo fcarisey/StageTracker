@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace StageTracker.Behaviors;
+namespace StageTracker.WPF.Behaviors;
 
 public class RemarkDataTemplateSelector : DataTemplateSelector
 {

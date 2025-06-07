@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StageTracker.Data;
+using StageTracker.WPF.Data;
 using StageTracker.Shared.ModelsEF;
 
-namespace StageTracker.Services.Data
+namespace StageTracker.WPF.Services.Data
 {
     public class ClasseDataService(DefaultDbContext context)
     {

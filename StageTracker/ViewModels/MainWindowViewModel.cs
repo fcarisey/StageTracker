@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
-using StageTracker.Interfaces.Services;
+using StageTracker.WPF.Interfaces.Services;
 using System.Windows.Controls;
 
-namespace StageTracker.ViewModels;
+namespace StageTracker.WPF.ViewModels;
 
 public partial class MainWindowViewModel : BaseViewModel
 {

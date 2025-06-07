@@ -1,15 +1,14 @@
 ﻿using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using StageTracker.Interfaces.Services;
-using StageTracker.Services;
-using StageTracker.ViewModels;
-using StageTracker.Views;
-using System.Diagnostics;
+using StageTracker.WPF.Interfaces.Services;
+using StageTracker.WPF.Services;
+using StageTracker.WPF.ViewModels;
+using StageTracker.WPF.Views;
 using System.Windows;
 
 
-namespace StageTracker
+namespace StageTracker.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml

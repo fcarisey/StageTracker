@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StageTracker.Interfaces.ViewModels;
+using StageTracker.WPF.Interfaces.ViewModels;
 using System.Windows;
 
-namespace StageTracker.ViewModels.Teacher.Student.Application;
+namespace StageTracker.WPF.ViewModels.Teacher.Student.Application;
 
 public partial class ShowViewModel : BaseViewModel, INavigableWithParameter
 {
