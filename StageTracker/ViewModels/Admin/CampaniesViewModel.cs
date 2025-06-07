@@ -11,7 +11,7 @@ namespace StageTracker.ViewModels.Admin;
 
 public partial class CampaniesViewModel : BaseViewModel
 {
-    private ObservableCollection<Models.Company> _companies = [];
+    private ObservableCollection<Shared.ModelsEF.Company> _companies = [];
 
     [ObservableProperty]
     private ICollectionView _filteredCompanies = default!;
@@ -31,7 +31,7 @@ public partial class CampaniesViewModel : BaseViewModel
     private async void LoadCompaniesAsync()
     {
         var companies = await _companyDataService.GetAllCompaniesAsync();
-        _companies = new ObservableCollection<Models.Company>(companies);
+        _companies = new ObservableCollection<Shared.ModelsEF.Company>(companies);
 
         FilteredCompanies = CollectionViewSource.GetDefaultView(_companies);
     }
@@ -44,13 +44,13 @@ public partial class CampaniesViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredCompanies.Filter = x =>
             {
-                if (x is Models.Company company)
+                if (x is Shared.ModelsEF.Company company)
                 {
                     if (company != null)
                     {
                         return company.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                               company.Email.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                               company.PhoneNumber.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                               (company.Email?.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                               (company.PhoneNumber?.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
                                company.Address.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
                     }
                 }
@@ -74,13 +74,13 @@ public partial class CampaniesViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public void ModifyCompany(Models.Company company)
+    public void ModifyCompany(Shared.ModelsEF.Company company)
     {
         _navigationService.NavigateTo<Views.Admin.Company.ModifyView>(company);
     }
 
     [RelayCommand]
-    public void DeleteCompany(Models.Company company)
+    public void DeleteCompany(Shared.ModelsEF.Company company)
     {
         MessageBoxResult result = MessageBox.Show($"Voulez-vous vraiment supprimer {company.Name}", "Suppression de l'entreprise", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

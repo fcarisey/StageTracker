@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StageTracker.Data;
-using StageTracker.Models;
+using StageTracker.Shared.ModelsEF;
 
 namespace StageTracker.Services.Data
 {

@@ -1,9 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
 using StageTracker.Interfaces.Services;
-using StageTracker.Services;
-using System.Windows;
 
 namespace StageTracker.ViewModels;
 

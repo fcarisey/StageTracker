@@ -11,7 +11,7 @@ namespace StageTracker.ViewModels.Admin;
 
 public partial class TeachersViewModel : BaseViewModel
 {
-    private ObservableCollection<Models.Teacher> _teachers = default!;
+    private ObservableCollection<Shared.ModelsEF.Teacher> _teachers = default!;
 
     [ObservableProperty]
     private ICollectionView _filteredTeachers = default!;
@@ -32,7 +32,7 @@ public partial class TeachersViewModel : BaseViewModel
     {
         var teachers = await _teacherDataService.GetAllTeachersAsync();
 
-        _teachers = new ObservableCollection<Models.Teacher>(teachers);
+        _teachers = new ObservableCollection<Shared.ModelsEF.Teacher>(teachers);
         FilteredTeachers = CollectionViewSource.GetDefaultView(_teachers);
     }
 
@@ -44,7 +44,7 @@ public partial class TeachersViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredTeachers.Filter = x =>
             {
-                if (x is Models.Teacher teacher)
+                if (x is Shared.ModelsEF.Teacher teacher)
                 {
                     if (teacher != null)
                     {
@@ -72,13 +72,13 @@ public partial class TeachersViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public void ModifyTeacher(Models.Teacher teacher)
+    public void ModifyTeacher(Shared.ModelsEF.Teacher teacher)
     {
         _navigationService.NavigateTo<Views.Admin.Teacher.ModifyView>(teacher);
     }
 
     [RelayCommand]
-    public void DeleteTeacher(Models.Teacher teacher)
+    public void DeleteTeacher(Shared.ModelsEF.Teacher teacher)
     {
         MessageBoxResult result = MessageBox.Show($"Voulez-vous vraiment supprimer {teacher.FullName}", "Suppression d'enseignant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
         

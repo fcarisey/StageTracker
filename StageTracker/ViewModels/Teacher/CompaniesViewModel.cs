@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.IdentityModel.Tokens;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Data;
 
@@ -15,7 +15,7 @@ public partial class CompaniesViewModel : BaseViewModel
 {
     private readonly INavigationService _navigationService;
 
-    private ObservableCollection<Models.Company>? _companies;
+    private ObservableCollection<Shared.ModelsEF.Company>? _companies;
 
     [ObservableProperty]
     private ICollectionView _filteredCompanies = default!;
@@ -34,7 +34,7 @@ public partial class CompaniesViewModel : BaseViewModel
     {
         var companies = await _companyDataService.GetAllCompaniesAsync();
         if (companies != null)
-            _companies = new ObservableCollection<Models.Company>(companies);
+            _companies = new ObservableCollection<Shared.ModelsEF.Company>(companies);
 
         FilteredCompanies = CollectionViewSource.GetDefaultView(_companies);
     }
@@ -89,15 +89,14 @@ public partial class CompaniesViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredCompanies.Filter = x =>
             {
-                if (x is Models.Company company)
+                if (x is Shared.ModelsEF.Company company)
                 {
                     if (company != null)
                     {
                         return company.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
                                 company.Address.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                                company.Email.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                                company.PhoneNumber.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                                company.PhoneNumber.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
+                                (company.Email?.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                                (company.PhoneNumber?.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ?? false);
                     }
                 }
 

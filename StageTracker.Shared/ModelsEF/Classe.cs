@@ -13,5 +13,4 @@ public class Classe
 
     [NotMapped]
     public bool HasStudents => Students.Count > 0;
-
 }

@@ -11,7 +11,7 @@ namespace StageTracker.ViewModels.Admin;
 
 public partial class ClassesViewModel : BaseViewModel
 {
-    private ObservableCollection<Models.Classe> _classes = [];
+    private ObservableCollection<Shared.ModelsEF.Classe> _classes = [];
 
     [ObservableProperty]
     private ICollectionView _filteredClasses = default!;
@@ -32,7 +32,7 @@ public partial class ClassesViewModel : BaseViewModel
     {
         var classes = await _classeDataService.GetAllClassesAsync();
 
-        _classes = new ObservableCollection<Models.Classe>(classes);
+        _classes = new ObservableCollection<Shared.ModelsEF.Classe>(classes);
         FilteredClasses = CollectionViewSource.GetDefaultView(_classes);
     }
 
@@ -44,7 +44,7 @@ public partial class ClassesViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredClasses.Filter = x =>
             {
-                if (x is Models.Classe classe)
+                if (x is Shared.ModelsEF.Classe classe)
                 {
                     if (classe != null)
                     {
@@ -72,13 +72,13 @@ public partial class ClassesViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public void ModifyClasse(Models.Classe classe)
+    public void ModifyClasse(Shared.ModelsEF.Classe classe)
     {
         _navigationService.NavigateTo<Views.Admin.Classe.ModifyView>(classe);
     }
 
     [RelayCommand]
-    public void DeleteClasse(Models.Classe classe)
+    public void DeleteClasse(Shared.ModelsEF.Classe classe)
     {
         MessageBoxResult result = MessageBox.Show($"Voulez-vous vraiment supprimer {classe.Name}", "Suppression de classe", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

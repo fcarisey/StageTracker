@@ -7,24 +7,18 @@ using System.Windows;
 
 namespace StageTracker.ViewModels.Admin.Company;
 
-public partial class ModifyViewModel : BaseViewModel, INavigableWithParameter
+public partial class ModifyViewModel(INavigationService navigationService, CompanyDataService companyDataService) : BaseViewModel, INavigableWithParameter
 {
-    private readonly INavigationService _navigationService;
+    private readonly INavigationService _navigationService = navigationService;
 
     [ObservableProperty]
-    private Models.Company? _company;
+    private Shared.ModelsEF.Company? _company;
 
-    private readonly CompanyDataService _companyDataService;
-
-    public ModifyViewModel(INavigationService navigationService, CompanyDataService companyDataService)
-    {
-        _navigationService = navigationService;
-        _companyDataService = companyDataService;
-    }
+    private readonly CompanyDataService _companyDataService = companyDataService;
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Company company)
+        if (parameter is Shared.ModelsEF.Company company)
         {
             Company = company;
         }

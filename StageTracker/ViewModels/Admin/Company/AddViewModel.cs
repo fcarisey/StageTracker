@@ -2,19 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using StageTracker.Interfaces.Services;
 using StageTracker.Services.Data;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace StageTracker.ViewModels.Admin.Company;
 
-public partial class AddViewModel : BaseViewModel
+public partial class AddViewModel(INavigationService navigationService, CompanyDataService companyDataService) : BaseViewModel
 {
-    private readonly INavigationService _navigationService;
+    private readonly INavigationService _navigationService = navigationService;
 
     [ObservableProperty]
     private string _name = string.Empty;
@@ -31,21 +25,12 @@ public partial class AddViewModel : BaseViewModel
     [ObservableProperty]
     private string _website = string.Empty;
 
-    [ObservableProperty]
-    private ObservableCollection<Models.Company> _companies = [];
-
-    private readonly CompanyDataService _companyDataService;
-
-    public AddViewModel(INavigationService navigationService, CompanyDataService companyDataService)
-    {
-        _navigationService = navigationService;
-        _companyDataService = companyDataService;
-    }
+    private readonly CompanyDataService _companyDataService = companyDataService;
 
     [RelayCommand]
     private void AddCompany()
     {
-        _companyDataService.AddCompanyAsync(new Models.Company()
+        _companyDataService.AddCompanyAsync(new Shared.ModelsEF.Company()
         {
             Name = Name,
             Email = Email,

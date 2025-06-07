@@ -8,11 +8,11 @@ namespace StageTracker.ViewModels.Teacher.Company;
 public partial class ShowViewModel : BaseViewModel, INavigableWithParameter
 {
     [ObservableProperty]
-    private Models.Company? _company;
+    private Shared.ModelsEF.Company? _company;
 
     public void OnNavigatedTo(object parameter)
     {
-        if (parameter is Models.Company company)
+        if (parameter is Shared.ModelsEF.Company company)
         {
             Company = company;
         }

@@ -1,9 +1,9 @@
-﻿using System.Security.Cryptography;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using StageTracker.Data;
 using StageTracker.Helpers;
 using StageTracker.Interfaces.Services;
+using StageTracker.Shared.ModelsEF;
 
 namespace StageTracker.Services;
 
@@ -15,7 +15,7 @@ public class AuthService(IUserSessionService userSessionService, INavigationServ
 
     public async void Authenticate(string username, string password)
     {
-        Models.User? user = null;
+        User? user = null;
         try
         {
             user = await _defaultDbContext.Users.Include(u => u.Teacher).Where(u => u.Email == username).FirstAsync();

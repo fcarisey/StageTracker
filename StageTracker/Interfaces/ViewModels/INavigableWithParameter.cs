@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StageTracker.Interfaces.ViewModels;
+﻿namespace StageTracker.Interfaces.ViewModels;
 
 public interface INavigableWithParameter
 {

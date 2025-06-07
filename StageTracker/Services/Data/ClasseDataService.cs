@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StageTracker.Data;
-using StageTracker.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StageTracker.Shared.ModelsEF;
 
 namespace StageTracker.Services.Data
 {

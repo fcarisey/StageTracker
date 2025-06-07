@@ -11,7 +11,7 @@ public partial class ApplicationsViewModel : BaseViewModel
 {
 
     [ObservableProperty]
-    private ObservableCollection<Models.Application> _applications = default!;
+    private ObservableCollection<Shared.ModelsEF.Application> _applications = default!;
 
     [ObservableProperty]
     private ICollectionView _filteredApplications = default!;
@@ -29,7 +29,7 @@ public partial class ApplicationsViewModel : BaseViewModel
     private async Task LoadApplicationsAsync()
     {
         var applications = await _applicationDataService.GetAllApplicationsAsync();
-        Applications = new ObservableCollection<Models.Application>(applications);
+        Applications = new ObservableCollection<Shared.ModelsEF.Application>(applications);
         FilteredApplications = CollectionViewSource.GetDefaultView(Applications);
     }
 
@@ -41,14 +41,14 @@ public partial class ApplicationsViewModel : BaseViewModel
             searchTerms = searchTerms.Trim();
             FilteredApplications.Filter = x =>
             {
-                if (x is Models.Application application)
+                if (x is Shared.ModelsEF.Application application)
                 {
                     if (application != null)
                     {
                         return application.Student.FirstName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
                                 application.Student.LastName.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
                                 application.Internship.Title.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
-                                application.Status.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase) ||
+                                application.Status.ToString().Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase)  ||
                                 application.Internship.Company.Name.Contains(searchTerms, StringComparison.CurrentCultureIgnoreCase);
                     }
                 }

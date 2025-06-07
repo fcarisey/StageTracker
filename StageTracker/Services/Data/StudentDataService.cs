@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StageTracker.Data;
-using StageTracker.Models;
+using StageTracker.Shared.ModelsEF;
+using System.Diagnostics;
 
 namespace StageTracker.Services.Data
 {
@@ -15,7 +16,9 @@ namespace StageTracker.Services.Data
 
         public async Task<List<Student>?> GetStudentsByClasseAsync(int id)
         {
-            return await _context.Students
+            try
+            {
+                var a = await _context.Students
                                  .Include(s => s.Classe)
                                  .Include(s => s.Remarks)
                                  .Include(s => s.Applications)
@@ -23,6 +26,22 @@ namespace StageTracker.Services.Data
                                         .ThenInclude(i => i.Company)
                                  .Where(s => s.ClasseId == id)
                                  .ToListAsync();
+
+                return await _context.Students
+                                 .Include(s => s.Classe)
+                                 .Include(s => s.Remarks)
+                                 .Include(s => s.Applications)
+                                    .ThenInclude(a => a.Internship)
+                                        .ThenInclude(i => i.Company)
+                                 .Where(s => s.ClasseId == id)
+                                 .ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Error fetching students by class: {ex.Message} : {ex.Source}");
+                return null;
+            }
+
         }
 
         public async void AddStudentAsync(Student student)
