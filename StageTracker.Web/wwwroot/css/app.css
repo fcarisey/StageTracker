@@ -1,5 +1,11 @@
+:root, [data-bs-theme=light] {
+    --nav-link-color: #7a7a7a;
+    --nav-link-color-active: #404040;
+    --nav-link-color-hover: #7a7a7a99;
+}
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {
@@ -31,7 +37,7 @@ a, .btn-link {
 .invalid {
     outline: 1px solid red;
 }
-
+    
 .validation-message {
     color: red;
 }

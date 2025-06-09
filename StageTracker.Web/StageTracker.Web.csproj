@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.16" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Pages\Company\" />
-    <Folder Include="Pages\Student\" />
   </ItemGroup>
 
   <ItemGroup>

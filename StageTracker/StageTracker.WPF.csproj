@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\StageTracker.Web\Pages\Component.razor" Link="Component.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.5" />

@@ -1,0 +1,37 @@
+﻿@page "/login"
+
+<div class="d-grid justify-content-center mt-5">
+    <h3 class="d-flex justify-content-center">Login</h3>
+
+    <EditForm Model="@loginDto" OnSubmit="@CheckLogin" class="form-control">
+        <DataAnnotationsValidator />
+
+        <div>
+            <label form="login">Email:</label>
+            <InputText @bind-Value="loginDto.Email" class="form-control" placeholder="jode@exemple.com" />
+            <span class="text-danger">
+                <ValidationMessage For="@(() => loginDto.Email)"/>
+            </span>
+        </div>
+
+        <div>
+            <label>Mot de passe:</label>
+            <InputText @bind-Value="loginDto.Password" class="form-control" placeholder="mot de passe" />
+            <span class="text-danger">
+                <ValidationMessage For="@(() => loginDto.Password)" />
+            </span>
+        </div>
+
+        <button class="form-control mt-3" type="submit">Se connecter</button>
+    </EditForm>
+</div>
+
+@code {
+    private LoginDto loginDto = new();
+
+    private void CheckLogin()
+    {
+        Console.WriteLine($"Email: {loginDto.Email}, password: {loginDto.Password}");
+        // login API, set Session, ...
+    }
+}
