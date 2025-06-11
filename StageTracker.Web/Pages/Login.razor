@@ -21,17 +21,53 @@
                 <ValidationMessage For="@(() => loginDto.Password)" />
             </span>
         </div>
-
+        
         <button class="form-control mt-3" type="submit">Se connecter</button>
+
+        @if (!accountExist)
+        {
+            <span class="text-danger">
+                Identifiant de compte ou mot de passe non valide
+            </span>
+        }
+        
     </EditForm>
 </div>
 
 @code {
     private LoginDto loginDto = new();
+    private bool accountExist = true;
 
-    private void CheckLogin()
+    protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine($"Email: {loginDto.Email}, password: {loginDto.Password}");
-        // login API, set Session, ...
+        await LocalStorage.RemoveItemAsync("expired_at");
+    }
+
+    private async void CheckLogin()
+    {
+        // dev login
+        if (loginDto.Email == "student@student.com" && loginDto.Password == "student")
+        {
+            Console.WriteLine("Login successful for student.");
+
+            await LocalStorage.SetItemAsync("email", loginDto.Email);
+            await LocalStorage.SetItemAsync("role", Shared.Enum.ERoles.STUDENT);
+            await LocalStorage.SetItemAsync("expired_at", DateTime.Now.AddMinutes(30));
+        }
+        else if (loginDto.Email == "company@company.com" && loginDto.Password == "company")
+        {
+            Console.WriteLine("Login successful for student.");
+
+            await LocalStorage.SetItemAsync("email", loginDto.Email);
+            await LocalStorage.SetItemAsync("role", Shared.Enum.ERoles.COMPANY);
+            await LocalStorage.SetItemAsync("expired_at", DateTime.Now.AddMinutes(30));
+        }
+        else
+        {
+            accountExist = false;
+            return;
+        }
+
+        Navigation.NavigateTo("/");
     }
 }

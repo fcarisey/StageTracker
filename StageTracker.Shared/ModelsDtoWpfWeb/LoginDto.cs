@@ -9,6 +9,9 @@ public record class LoginDto()
     public string? Email { get; set; }
 
     [Required(ErrorMessage = "Un mot de passe est requis !")]
-    //[MinLength(12, ErrorMessage = "Le mot de passe ne correspond pas !")] dev, bypass password
+    #if DEBUG
+    #else
+    [MinLength(12, ErrorMessage = "Le mot de passe ne correspond pas !")]
+    #endif
     public string? Password { get; set; }
 }

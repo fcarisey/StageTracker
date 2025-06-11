@@ -1,14 +1,15 @@
 ﻿@inherits LayoutComponentBase
 
+
 <div class="page">
     <main>
 
         <nav>
-            @if (role == Shared.Enum.ERoles.COMPANY)
+            @if (Role == Shared.Enum.ERoles.COMPANY)
             {
                 <StageTracker.Web.Layout.Company.CompanyNavMenu />
             }
-            else if (role == Shared.Enum.ERoles.STUDENT)
+            else if (Role == Shared.Enum.ERoles.STUDENT)
             {
                 <StageTracker.Web.Layout.Student.StudentNavMenu />
             }
@@ -21,5 +22,17 @@
 </div>
 
 @code{
-    const Shared.Enum.ERoles role = Shared.Enum.ERoles.STUDENT; // company or student
+    Shared.Enum.ERoles Role = Shared.Enum.ERoles.UNASSIGNED;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Expiration by API token verification 
+
+        var localRoleExists = await LocalStorage.ContainKeyAsync("role");
+        if (localRoleExists)
+        {
+            var role = await LocalStorage.GetItemAsync<Shared.Enum.ERoles>("role");
+            Role = role;
+        }
+    }
 }
