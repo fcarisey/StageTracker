@@ -2,6 +2,7 @@
     --nav-link-color: #7a7a7a;
     --nav-link-color-active: #404040;
     --nav-link-color-hover: #7a7a7a99;
+    --btn-submit-background-color: #283276;
 }
 
 html, body {
@@ -103,6 +104,16 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+button[type=submit]{
+    background-color: var(--btn-submit-background-color) !important;
+    color: white !important;
+}
+
+button:hover{
+    transition: ease 0.5s;
+    opacity: 0.9;
+}
 
 code {
     color: #c02d76;

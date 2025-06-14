@@ -50,7 +50,7 @@
         {
             Console.WriteLine("Login successful for student.");
 
-            await LocalStorage.SetItemAsync("email", loginDto.Email);
+            await LocalStorage.SetItemAsStringAsync("email", loginDto.Email);
             await LocalStorage.SetItemAsync("role", Shared.Enum.ERoles.STUDENT);
             await LocalStorage.SetItemAsync("expired_at", DateTime.Now.AddMinutes(30));
         }

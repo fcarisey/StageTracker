@@ -1,0 +1,76 @@
+﻿@page "/student"
+
+<PageTitle>Candidat</PageTitle>
+
+<h1>Bonjour, @StudentFullName</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <EditForm Model="@OfferLiteSearchDto" OnSubmit="@SearchFormSubmit" class="container">
+                <h4 class="row">Recherche</h4>
+                <div class="row">
+                    <div class="row">
+                        <label class="form-label">Métier, mot-clé</label>
+                        <InputText @bind-Value="OfferLiteSearchDto.SearchTerms" class="form-control"></InputText>
+                    </div>
+
+                    <div class="row">
+                        <label class="form-label">Lieu</label>
+                        <InputText @bind-Value="OfferLiteSearchDto.Location" class="form-control"></InputText>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">Rechercher</button>
+                </div>
+            </EditForm>
+
+        </div>
+
+        <div class="col">
+            <h4>Mes offres</h4>
+            <div class="row">
+                <div class="col">
+                    <img height="100" width="100" class="rounded-3" src="/StageTracker_logoB.webp" />
+                </div>
+
+                <div class="col align-content-center">
+                    <div class="row">
+                        <h4>Développeur C#</h4>
+                    </div>
+                    <div class="row">
+                        <p>Courte description du post ...</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    private StudentHomeDto? StudentHomeDto { get; set; }
+
+    private OfferLiteSearchDto OfferLiteSearchDto { get; set; } = new();
+
+    private string? StudentFullName { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate fetching student token from a sAPI
+
+        await Task.Delay(150); // Simulate network delay
+
+        StudentHomeDto = new StudentHomeDto
+            {
+                FirstName = "John",
+                LastName = "Doe",
+            };
+
+        StudentFullName = $"{StudentHomeDto.FirstName} {StudentHomeDto.LastName}";
+    }
+
+    private void SearchFormSubmit()
+    {
+        
+    }
+}

@@ -24,6 +24,29 @@
 @code{
     Shared.Enum.ERoles Role = Shared.Enum.ERoles.UNASSIGNED;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var localRoleExists = await LocalStorage.ContainKeyAsync("role");
+        if (localRoleExists)
+        {
+            var role = await LocalStorage.GetItemAsync<Shared.Enum.ERoles>("role");
+
+            switch (role)
+            {
+                case Shared.Enum.ERoles.STUDENT:
+                    Navigation.NavigateTo("/student");
+                    break;
+                case Shared.Enum.ERoles.COMPANY:
+                    Navigation.NavigateTo("/company");
+                    break;
+                default:
+                    break;
+            }
+
+            Role = role;
+        }
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         // Expiration by API token verification 

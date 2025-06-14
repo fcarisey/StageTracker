@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Company\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\StageTracker.Shared\StageTracker.Shared.csproj" />
   </ItemGroup>
 
