@@ -1,0 +1,15 @@
+﻿<a href="#offer-@OfferLiteResult.Id" class="row offer">
+    <div class="col flex-grow-0">
+        <img height="100" width="100" class="rounded-3" src="/@OfferLiteResult.Logo" />
+    </div>
+
+    <div class="col">
+        <h5>@OfferLiteResult.Title</h5>
+        <p>@OfferLiteResult.ShortDescription</p>
+    </div>
+</a>
+
+@code {
+    [Parameter]
+    public required OfferLiteResultDto OfferLiteResult { get; init; }
+}

@@ -1,0 +1,11 @@
+﻿.offer{
+    text-decoration: none;
+}
+
+.offer p{
+    color: black;
+}
+
+.offer:hover h5{
+    text-decoration: underline;
+}
