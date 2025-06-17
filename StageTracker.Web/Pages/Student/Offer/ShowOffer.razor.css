@@ -1,0 +1,26 @@
+﻿.container{
+    height: 90vh;
+}
+
+.row{
+    height: 100%;
+}
+
+.offer-detailed{
+    width: calc((100% / 3) * 2);
+    height: 100%;
+}
+
+    .offer-detailed p {
+        overflow-y: auto;
+        height: 90%;
+    }
+
+.offer-application{
+    min-width: 300px;
+    width: calc(100% / 3);
+    height: 100%;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 7px;
+}

@@ -1,0 +1,97 @@
+﻿@page "/student/offer/{OfferId:int}"
+
+@if (OfferDetailed is not null)
+{
+    <div class="container">
+        <div class="row row-cols-2">
+            <div class="col offer-detailed">
+                <h3>@OfferDetailed.Title</h3>
+                <p class="py-4 mx-3">@OfferDetailed.Description</p>
+            </div>
+            <div class="col offer-application">
+                <p>@OfferDetailed.Location</p>
+                <p class="badge bg-warning">@OfferDetailed.Away</p>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public int OfferId { get; set; }
+
+    private OfferDetailedDto? OfferDetailed { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(150);
+
+        OfferDetailed = new(
+                        OfferId,
+                        "Développeur C#",
+                        @"Mensarum enim voragines et varias voluptatum inlecebras, ne longius progrediar, praetermitto illuc transiturus quod quidam per ampla spatia urbis subversasque silices sine periculi metu properantes equos velut publicos signatis quod dicitur calceis agitant, familiarium agmina tamquam praedatorios globos post terga trahentes ne Sannione quidem, ut ait comicus, domi relicto. quos imitatae matronae complures opertis capitibus et basternis per latera civitatis cuncta discurrunt.
+
+                Exsistit autem hoc loco quaedam quaestio subdifficilis,
+                            num quando amici novi,
+                            digni amicitia,
+                            veteribus sint anteponendi,
+                            ut equis vetulis teneros anteponere solemus.Indigna homine dubitatio! Non enim debent esse amicitiarum sicut aliarum rerum satietates; veterrima quaeque,
+                            ut ea vina,
+                            quae vetustatem ferunt,
+                            esse debet suavissima; verumque illud est,
+                            quod dicitur,
+                            multos modios salis simul edendos esse,
+                            ut amicitiae munus expletum sit.
+                <br/>
+                Procedente igitur mox tempore cum adventicium nihil inveniretur,
+                            relicta ora maritima in Lycaoniam adnexam Isauriae se contulerunt ibique densis intersaepientes itinera praetenturis provincialium et viatorum opibus pascebantur.
+
+                Illud tamen clausos vehementer angebat quod captis navigiis,
+                            quae frumenta vehebant per flumen,
+                            Isauri quidem alimentorum copiis adfluebant,
+                            ipsi vero solitarum rerum cibos iam consumendo inediae propinquantis aerumnas exitialis horrebant.
+
+                Mox dicta finierat,
+                            multitudo omnis ad,
+                            quae imperator voluit,
+                            promptior laudato consilio consensit in pacem ea ratione maxime percita,
+                            quod norat expeditionibus crebris fortunam eius in malis tantum civilibus vigilasse,
+                            cum autem bella moverentur externa,
+                            accidisse plerumque luctuosa,
+                            icto post haec foedere gentium ritu perfectaque sollemnitate imperator Mediolanum ad hiberna discessit.
+
+                Sed fruatur sane hoc solacio atque hanc insignem ignominiam,
+                            quoniam uni praeter se inusta sit,
+                            putet esse leviorem,
+                            dum modo,
+                            cuius exemplo se consolatur,
+                            eius exitum expectet,
+                            praesertim cum in Albucio nec Pisonis libidines nec audacia Gabini fuerit ac tamen hac una plaga conciderit,
+                            ignominia senatus.
+
+                Eodem tempore etiam Hymetii praeclarae indolis viri negotium est actitatum,
+                            cuius hunc novimus esse textum.cum Africam pro consule regeret Carthaginiensibus victus inopia iam lassatis,
+                            ex horreis Romano populo destinatis frumentum dedit,
+                            pauloque postea cum provenisset segetum copia,
+                            integre sine ulla restituit mora.
+
+                Quod cum ita sit,
+                            paucae domus studiorum seriis cultibus antea celebratae nunc ludibriis ignaviae torpentis exundant,
+                            vocali sonu,
+                            perflabili tinnitu fidium resultantes.denique pro philosopho cantor et in locum oratoris doctor artium ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis organa fabricantur hydraulica,
+                            et lyrae ad speciem carpentorum ingentes tibiaeque et histrionici gestus instrumenta non levia.
+
+                Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem,
+                            sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant,
+                            quae Isauriae scopulis sunt controversa.
+
+                Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt", "Paris, Françe", "StageTracker_logoB.webp" ?? "defaultOffer.webp", 
+        
+                        Shared.Enum.EOfferAway.REMOTE
+        );
+
+        Console.WriteLine($"OfferId: {OfferId}");
+
+    }
+}
