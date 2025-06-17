@@ -36,6 +36,13 @@ main {
         text-overflow: ellipsis;
     }
 
+.back-arrow{
+    position: absolute;
+}
+    .back-arrow::before{
+        content: '<';
+    }
+
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using StageTracker.WPF.Interfaces.Services;
-using StageTracker.Shared.Enum;
+using StageTracker.Shared.Enums;
 
 namespace StageTracker.WPF.Services
 {

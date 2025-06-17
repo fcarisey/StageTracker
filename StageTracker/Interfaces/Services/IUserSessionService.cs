@@ -1,4 +1,4 @@
-﻿using StageTracker.Shared.Enum;
+﻿using StageTracker.Shared.Enums;
 
 namespace StageTracker.WPF.Interfaces.Services
 {

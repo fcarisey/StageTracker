@@ -6,11 +6,13 @@
       xmlns:local="clr-namespace:StageTracker.WPF.Views.Teacher.Student" 
       xmlns:behaviors="clr-namespace:StageTracker.WPF.Behaviors"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:ec="clr-namespace:StageTracker.WPF.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="390" d:DesignWidth="800">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <ec:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -68,7 +70,7 @@
         <DataGrid IsReadOnly="True" Visibility="{Binding Student.HasApplication, Converter={StaticResource BooleanToVisibilityConverter}}" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Student.Applications}" CanUserSortColumns="True" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" Margin="300,142,60,0" MaxHeight="225" MaxWidth="400" GridLinesVisibility="Horizontal" VerticalAlignment="Top" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Entreprise" Binding="{Binding Internship.Company.Name}" Width="*" MinWidth="105" MaxWidth="115"/>
-                <DataGridTextColumn Header="Statu" Binding="{Binding Status}" Width="*" MinWidth="105" MaxWidth="115"/>
+                <DataGridTextColumn Header="Statu" Binding="{Binding Status, Converter={StaticResource EnumDescriptionConverter}}" Width="*" MinWidth="105" MaxWidth="115"/>
                 <DataGridTemplateColumn Header="" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

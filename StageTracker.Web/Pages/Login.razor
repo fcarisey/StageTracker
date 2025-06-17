@@ -51,7 +51,7 @@
             Console.WriteLine("Login successful for student.");
 
             await LocalStorage.SetItemAsStringAsync("email", loginDto.Email);
-            await LocalStorage.SetItemAsync("role", Shared.Enum.ERoles.STUDENT);
+            await LocalStorage.SetItemAsync("role", Shared.Enums.ERoles.STUDENT);
             await LocalStorage.SetItemAsync("expired_at", DateTime.Now.AddMinutes(30));
         }
         else if (loginDto.Email == "company@company.com" && loginDto.Password == "company")
@@ -59,7 +59,7 @@
             Console.WriteLine("Login successful for student.");
 
             await LocalStorage.SetItemAsync("email", loginDto.Email);
-            await LocalStorage.SetItemAsync("role", Shared.Enum.ERoles.COMPANY);
+            await LocalStorage.SetItemAsync("role", Shared.Enums.ERoles.COMPANY);
             await LocalStorage.SetItemAsync("expired_at", DateTime.Now.AddMinutes(30));
         }
         else

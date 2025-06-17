@@ -5,15 +5,19 @@
     <main>
 
         <nav>
-            @if (Role == Shared.Enum.ERoles.COMPANY)
+            @if (Role == Shared.Enums.ERoles.COMPANY)
             {
                 <StageTracker.Web.Layout.Company.CompanyNavMenu />
             }
-            else if (Role == Shared.Enum.ERoles.STUDENT)
+            else if (Role == Shared.Enums.ERoles.STUDENT)
             {
                 <StageTracker.Web.Layout.Student.StudentNavMenu />
             }
         </nav>
+
+        <div class="back-arrow" onclick="history.back()"></div>
+
+        
 
         <article class="content px-4">
             @Body
@@ -22,21 +26,21 @@
 </div>
 
 @code{
-    Shared.Enum.ERoles Role = Shared.Enum.ERoles.UNASSIGNED;
+    Shared.Enums.ERoles Role = Shared.Enums.ERoles.UNASSIGNED;
 
     protected override async Task OnInitializedAsync()
     {
         var localRoleExists = await LocalStorage.ContainKeyAsync("role");
         if (localRoleExists)
         {
-            var role = await LocalStorage.GetItemAsync<Shared.Enum.ERoles>("role");
+            var role = await LocalStorage.GetItemAsync<Shared.Enums.ERoles>("role");
 
             switch (role)
             {
-                case Shared.Enum.ERoles.STUDENT:
+                case Shared.Enums.ERoles.STUDENT:
                     Navigation.NavigateTo("/student");
                     break;
-                case Shared.Enum.ERoles.COMPANY:
+                case Shared.Enums.ERoles.COMPANY:
                     Navigation.NavigateTo("/company");
                     break;
                 default:
@@ -54,7 +58,7 @@
         var localRoleExists = await LocalStorage.ContainKeyAsync("role");
         if (localRoleExists)
         {
-            var role = await LocalStorage.GetItemAsync<Shared.Enum.ERoles>("role");
+            var role = await LocalStorage.GetItemAsync<Shared.Enums.ERoles>("role");
             Role = role;
         }
     }

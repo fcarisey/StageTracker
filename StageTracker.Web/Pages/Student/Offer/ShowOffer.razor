@@ -5,17 +5,34 @@
     <div class="container">
         <div class="row row-cols-2">
             <div class="col offer-detailed">
-                <h3>@OfferDetailed.Title</h3>
-                <p class="py-4 mx-3">@OfferDetailed.Description</p>
+                <h4>@OfferDetailed.Title</h4>
+                <p class="py-4 mx-3 description">@OfferDetailed.Description</p>
             </div>
             <div class="col offer-application">
                 <p>@OfferDetailed.Location</p>
-                <p class="badge bg-warning">@OfferDetailed.Away</p>
+                @if (OfferDetailed.Away != Shared.Enums.EOfferAway.UNKNOWN && OfferDetailed.Away != Shared.Enums.EOfferAway.UNASSIGNED)
+                {
+                    <p class="badge">@OfferDetailed.Away.GetDescription()</p>
+                }
+
+                -
+
+                @if (OfferDetailed.Schedule != Shared.Enums.EOfferSchedule.UNASSIGNED && OfferDetailed.Schedule != Shared.Enums.EOfferSchedule.UNKNOWN)
+                {
+                    <p class="badge">@OfferDetailed.Schedule.GetDescription()</p>
+                }
             </div>
         </div>
     </div>
+}else
+{
+    // Loading state
+    <div class="flex loading">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
 }
-
 
 @code {
     [Parameter]
@@ -86,12 +103,13 @@
                             sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant,
                             quae Isauriae scopulis sunt controversa.
 
-                Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt", "Paris, Françe", "StageTracker_logoB.webp" ?? "defaultOffer.webp", 
-        
-                        Shared.Enum.EOfferAway.REMOTE
+                Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt",
+                        
+                        "Paris, France",
+                        "StageTracker_logoB.webp" ?? "defaultOffer.webp", 
+                        Shared.Enums.EOfferAway.REMOTE,
+                        Shared.Enums.EOfferSchedule.PARTTIME
         );
-
-        Console.WriteLine($"OfferId: {OfferId}");
 
     }
 }

@@ -6,8 +6,13 @@
       xmlns:local="clr-namespace:StageTracker.WPF.Views.Teacher"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:behaviors="clr-namespace:StageTracker.WPF.Behaviors"
+      xmlns:ec="clr-namespace:StageTracker.WPF.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="390" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ec:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+    </UserControl.Resources>
 
     <Grid Background="White">
         <Label Content="Candidatures" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" FontSize="24"/>
@@ -24,7 +29,7 @@
                 <DataGridTextColumn Header="Nom" Binding="{Binding Student.LastName}" Width="*" MinWidth="105" MaxWidth="200"/>
                 <DataGridTextColumn Header="Prénom" Binding="{Binding Student.FirstName}" Width="*" MinWidth="105" MaxWidth="200"/>
                 <DataGridTextColumn Header="Entreprise" Binding="{Binding Internship.Company.Name}" Width="*" MinWidth="105" MaxWidth="220"/>
-                <DataGridTextColumn Header="Statu" Binding="{Binding Status}" Width="SizeToCells"/>
+                <DataGridTextColumn Header="Statu" Binding="{Binding Status, Converter={StaticResource EnumDescriptionConverter}}" Width="SizeToCells"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource VerticalScrollBar}"/>
