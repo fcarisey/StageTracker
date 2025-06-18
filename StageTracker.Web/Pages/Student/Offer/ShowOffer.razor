@@ -9,18 +9,33 @@
                 <p class="py-4 mx-3 description">@OfferDetailed.Description</p>
             </div>
             <div class="col offer-application">
-                <p>@OfferDetailed.Location</p>
-                @if (OfferDetailed.Away != Shared.Enums.EOfferAway.UNKNOWN && OfferDetailed.Away != Shared.Enums.EOfferAway.UNASSIGNED)
-                {
-                    <p class="badge">@OfferDetailed.Away.GetDescription()</p>
-                }
+                <div class="row">
+                    <div class="col offer-application-info-1">
+                        <h4>@OfferDetailed.Company.Name</h4>
+                        <p class="text-body-tertiary">@OfferDetailed.Location</p>
+                        @if (OfferDetailed.Away != Shared.Enums.EOfferAway.UNKNOWN && OfferDetailed.Away != Shared.Enums.EOfferAway.UNASSIGNED)
+                        {
+                            <p class="badge">@OfferDetailed.Away.GetDescription()</p>
+                        }
 
-                -
+                        -
 
-                @if (OfferDetailed.Schedule != Shared.Enums.EOfferSchedule.UNASSIGNED && OfferDetailed.Schedule != Shared.Enums.EOfferSchedule.UNKNOWN)
-                {
-                    <p class="badge">@OfferDetailed.Schedule.GetDescription()</p>
-                }
+                        @if (OfferDetailed.Schedule != Shared.Enums.EOfferSchedule.UNASSIGNED && OfferDetailed.Schedule != Shared.Enums.EOfferSchedule.UNKNOWN)
+                        {
+                            <p class="badge">@OfferDetailed.Schedule.GetDescription()</p>
+                        }
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <button class="navbar-toggler offer-application-info-2-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#OfferApplicationInfos2" aria-controls="OfferApplicationInfos2" aria-expanded="false" aria-label="Toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="col offer-application-info-2" id="OfferApplicationInfos2">
+                        <p>blabla</p>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -106,7 +121,7 @@
                 Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt",
                         
                         "Paris, France",
-                        "StageTracker_logoB.webp" ?? "defaultOffer.webp", 
+                        new CompanySummaryDto(0, "Microsoft", "StageTracker_logoB.webp"),
                         Shared.Enums.EOfferAway.REMOTE,
                         Shared.Enums.EOfferSchedule.PARTTIME
         );

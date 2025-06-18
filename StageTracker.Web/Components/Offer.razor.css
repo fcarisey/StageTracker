@@ -1,11 +1,16 @@
-﻿.offer{
+﻿.offer {
     text-decoration: none;
+    max-width: 500px;
+    height: 75px;
+    overflow-y: hidden;
 }
 
-.offer p{
-    color: black;
-}
+    .offer .short-description {
+        color: black;
+        text-overflow: ellipsis;
+    }
 
-.offer:hover h5{
-    text-decoration: underline;
-}
+    .offer:hover h5{
+        text-decoration: underline;
+    }
+

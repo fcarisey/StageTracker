@@ -7,7 +7,7 @@ public record OfferDetailedDto(
                                 string Title,
                                 string Description,
                                 string Location,
-                                string Logo = "DefaultOfferLogo.webp",
+                                CompanySummaryDto Company,
                                 EOfferAway Away = EOfferAway.UNASSIGNED,
                                 EOfferSchedule Schedule = EOfferSchedule.UNASSIGNED
     );

@@ -1,3 +1,25 @@
-﻿.offer-results{
+﻿.search-lite{
+    width: 100%;
+}
+
+.col:has(> .offer-results) {
+    display: none;
+}
+
+.offer-results{
     height: calc(100vh / 2);
+}
+    .offer-results ::deep > *:not(:last-child):not(:first-child){
+        margin-top: 5%; /* 7px */
+        margin-bottom: 5%;
+    }
+
+@media (min-width: 992px) {
+    .col:has(> .offer-results){
+        display: block;
+    }
+
+    .search-lite {
+        width: 41.66666667%;
+    }
 }
