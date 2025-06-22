@@ -12,4 +12,5 @@ public class Offer
     public string? Logo { get; set; }
     public EOfferAway Away { get; set; } = EOfferAway.UNASSIGNED;
     public EOfferSchedule Schedule { get; set; } = EOfferSchedule.UNASSIGNED;
+    public EOfferContractType ContractType { get; set; } = EOfferContractType.UNASSIGNED;
 }
