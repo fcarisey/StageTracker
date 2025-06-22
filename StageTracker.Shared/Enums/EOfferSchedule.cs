@@ -10,6 +10,7 @@ public enum EOfferSchedule
     [Description("À temps partiel")]
     PARTTIME,
 
-    UNASSIGNED,
-    UNKNOWN
+    UNKNOWN,
+    UNASSIGNED
 }
+
