@@ -1,7 +1,64 @@
 ﻿@page "/student/search/{Location}/{SearchTerms}"
 @page "/student/search"
 
-<h3>Search @Location - @SearchTerms</h3>
+@using StageTracker.Shared.Extensions;
+
+<div class="container">
+    <div class="row">
+        <div class="d-inline-block">
+            <InputText @bind-Value="OfferDetailedSearch.SearchTerms" placeholder="Métier, mot-clé"></InputText>
+            <InputText @bind-Value="OfferDetailedSearch.Location" placeholder="Localisation"></InputText>
+            <InputSelect @bind-Value="OfferDetailedSearch.Away">
+                <option value="-1" selected></option>
+                @foreach (var away in OfferDetailedSearch.Away.GetList())
+                {
+                    <option value="@((int)away)">@away.GetDescription()</option>
+                }
+            </InputSelect>
+            <InputSelect @bind-Value="OfferDetailedSearch.Schedule">
+                <option value="-1" selected></option>
+                @foreach (var schedule in OfferDetailedSearch.Schedule.GetList())
+                {
+                    <option value="@((int)schedule)">@schedule.GetDescription()</option>
+                }
+            </InputSelect>
+            <InputSelect @bind-Value="OfferDetailedSearch.ContractType">
+                <option value="-1" selected></option>
+                @foreach (var contractType in OfferDetailedSearch.ContractType.GetList())
+                {
+                    <option value="@((int)contractType)">@contractType.GetDescription()</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+
+
+<EditForm Model="@OfferDetailedSearch">
+
+</EditForm>
+
+@if (OfferLiteResults.Count == 0)
+{
+    <div class="loading">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+}
+else
+{
+    @foreach (var offer in OfferLiteResults)
+    {
+        <Offer OfferLiteResult="offer"></Offer>
+    }
+}
 
 @code {
     [Parameter]
@@ -18,9 +75,49 @@
     [SupplyParameterFromQuery(Name = "l")]
     public string? LocationFromQuery { get; set; }
 
+    private OfferDetailedSearchDto OfferDetailedSearch { get; set; } = new();
+
+    private List<OfferLiteResultDto> OfferLiteResults { get; set; } = [];
+
     protected override void OnParametersSet()
     {
         SearchTerms ??= SearchTermsFromQuery;
         Location ??= LocationFromQuery;
+
+        OfferDetailedSearch.SearchTerms = SearchTerms;
+        OfferDetailedSearch.Location = Location;
+
+        base.OnParametersSet();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await SearchOffersAsync();
+
+        await base.OnParametersSetAsync();
+    }
+
+    private async Task SearchOffersAsync()
+    {
+        // Send OfferDetailedSearch to the service (API) to get results
+
+        await Task.Delay(200); // Simulate a delay for the search operation
+
+        // Example: Populate OfferLiteResults with dummy data
+        OfferLiteResults = new()
+        {
+            new (1, "Offer 1", "Description for Offer 1", new(0)),
+            new (2, "Offer 2", "Description for Offer 2", new(0, "StageTracker_logoB.webp")),
+            new (3, "Offer 3", "Description for Offer 3", new(0, "StageTracker_logoB.webp")),
+            new (4, "Offer 4", "Description for Offer 4", new(0, "StageTracker_logoB.webp")),
+            new (5, "Offer 5", "Description for Offer 5", new(0, "StageTracker_logoB.webp")),
+            new (6, "Offer 6", "Description for Offer 6", new(0)),
+            new (7, "Offer 7", "Description for Offer 7", new(0)),
+            new (8, "Offer 8", "Description for Offer 8", new(0, "StageTracker_logoB.webp")),
+            new (9, "Offer 9", "Description for Offer 9", new(0)),
+            new (10, "Offer 10", "Description for Offer 10", new(0, "StageTracker_logoB.webp")),
+        };
+
+
     }
 }
