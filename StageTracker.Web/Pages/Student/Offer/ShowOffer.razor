@@ -32,7 +32,15 @@
                 <div class="row flex-column position-relative">
                     <button class="navbar-toggler offer-application-info-2-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#OfferApplicationInfos2" aria-controls="OfferApplicationInfos2" aria-expanded="false" aria-label="Toggler"></button>
                     <div class="col collapse show offer-application-info-2" id="OfferApplicationInfos2">
-                        <p>blabla</p>
+                        <div class="container-fluid">
+                            <EditForm OnSubmit="@ApplyFormSubmit" Model="@StudentApply" class="applyForm">
+                                <div class="form-group">
+                                    <label for="studentApplyMessage">Message</label>
+                                    <InputTextArea id="studentApplyMessage" class="form-control" @bind-Value="StudentApply.MessageToRecruiter" placeholder="Votre message ici..." />
+                                </div>
+                                <button class="btn btn-primary w-100 mt-3" type="submit">Postuler</button>
+                            </EditForm>
+                        </div>
                     </div>
                 </div>
                 
@@ -54,6 +62,15 @@
     public int OfferId { get; set; }
 
     private OfferDetailedDto? OfferDetailed { get; set; }
+
+    private StudentApplyDto StudentApply { get; set; } = new();
+
+    private void ApplyFormSubmit()
+    {
+        StudentApply.Status = Shared.Enums.EApplicationStatus.PROCESSING;
+        StudentApply.StudentId = 1; // This should be replaced with the actual student ID from the authentication context
+        StudentApply.OfferId = OfferId; // This should be the ID of the offer being applied for
+    }
 
     protected override async Task OnInitializedAsync()
     {
