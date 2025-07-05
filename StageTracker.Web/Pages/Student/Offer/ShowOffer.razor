@@ -1,5 +1,7 @@
 ﻿@page "/student/offer/{OfferId:int}"
 
+@inject IJSRuntime JS
+
 @if (OfferDetailed is not null)
 {
     <div class="container">
@@ -27,10 +29,8 @@
                     </div>
                     
                 </div>
-                <div class="row">
-                    <button class="navbar-toggler offer-application-info-2-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#OfferApplicationInfos2" aria-controls="OfferApplicationInfos2" aria-expanded="false" aria-label="Toggler">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <div class="row flex-column position-relative">
+                    <button class="navbar-toggler offer-application-info-2-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#OfferApplicationInfos2" aria-controls="OfferApplicationInfos2" aria-expanded="false" aria-label="Toggler"></button>
                     <div class="col collapse show offer-application-info-2" id="OfferApplicationInfos2">
                         <p>blabla</p>
                     </div>
@@ -119,12 +119,22 @@
                             quae Isauriae scopulis sunt controversa.
 
                 Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt",
-                        
+
                         "Paris, France",
                         new CompanySummaryDto(0, "Microsoft", "StageTracker_logoB.webp"),
                         Shared.Enums.EOfferAway.REMOTE,
                         Shared.Enums.EOfferSchedule.PARTTIME
         );
 
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _ = JS.InvokeVoidAsync("initShowOffer");
+        }
+
+        base.OnAfterRender(firstRender);
     }
 }
