@@ -52,32 +52,56 @@
     background-color: #8cb8f9;
 }
 
-.offer-application-info-2-toggler {
-    display: block;
+.collapsing{
+    transition: 5ms !important;
 }
 
-@media (min-width: 992px){
+.offer-application-info-2-toggler {
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 53%;
+    top: -20px;
+}
+    .offer-application-info-2-toggler::before {
+        font-family: bootstrap-icons !important;
+        content: "\F238";
+        transition: 1s;
+    }
+
+    .offer-application-info-2-toggler.collapsed::before {
+        content: "\F22C";
+    }
+
+    .offer-application-info-2-toggler.active::before {
+        content: url("assets/arrow_down52.webp");
+        display: inline-block;
+        transform: rotate(180deg);
+    }
+
+@media (min-width: 992px) {
     .container {
-        box-shadow: #333 0 0px 5px -3px;
-    }
+    box-shadow: #333 0 0px 5px -3px;
+}
 
-    .row{
-        flex-direction: row;
-    }
+.row{
+    flex-direction: row;
+}
 
-    .offer-detailed {
-        width: calc((100% / 3) * 2);
-    }
+.offer-detailed {
+    width: calc((100% / 3) * 2);
+}
 
-    .offer-application {
-        width: calc(100% / 3);
-    }
+.offer-application {
+    width: calc(100% / 3);
+}
 
-    .offer-application-info-1 {
-        border-radius: 0 7px 0 0;
-    }
+.offer-application-info-1 {
+    border-radius: 0 7px 0 0;
+}
 
-    .offer-application-info-2-toggler {
-        display: none;
-    }
+.offer-application-info-2-toggler {
+    display: none;
+}
 }
