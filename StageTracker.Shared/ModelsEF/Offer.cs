@@ -9,7 +9,10 @@ public class Offer
     public required string ShortDescription { get; set; }
     public required string Description { get; set; }
     public string? Location { get; set; }
-    public string? Logo { get; set; }
+
+    public int CompanyId { get; set; }
+    public required Company Company { get; set; }
+
     public EOfferAway Away { get; set; } = EOfferAway.UNASSIGNED;
     public EOfferSchedule Schedule { get; set; } = EOfferSchedule.UNASSIGNED;
     public EOfferContractType ContractType { get; set; } = EOfferContractType.UNASSIGNED;

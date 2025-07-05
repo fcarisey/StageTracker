@@ -14,6 +14,9 @@ public class Application
     public int StudentId { get; set; }
     public required Student Student { get; set; }
 
-    public int InternshipId { get; set; }
-    public required Internship Internship { get; set; }
+    public int? InternshipId { get; set; }
+    public Internship? Internship { get; set; }
+
+    public int OfferId { get; set; }
+    public required Offer Offer { get; set; }
 }
