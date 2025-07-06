@@ -35,6 +35,10 @@
                         <div class="container-fluid">
                             <EditForm OnSubmit="@ApplyFormSubmit" Model="@StudentApply" class="applyForm">
                                 <div class="form-group">
+                                    <label for="studentCV">CV</label>
+                                    <InputFile id="studentCV" accecpt=".pdf" class="form-control" OnChange="@CVInputChanged" placeholder="Votre CV ici..." />
+                                </div>
+                                <div class="form-group">
                                     <label for="studentApplyMessage">Message</label>
                                     <InputTextArea id="studentApplyMessage" class="form-control" @bind-Value="StudentApply.MessageToRecruiter" placeholder="Votre message ici..." />
                                 </div>
@@ -69,7 +73,16 @@
     {
         StudentApply.Status = Shared.Enums.EApplicationStatus.PROCESSING;
         StudentApply.StudentId = 1; // This should be replaced with the actual student ID from the authentication context
-        StudentApply.OfferId = OfferId; // This should be the ID of the offer being applied for
+        StudentApply.OfferId = OfferId;
+        // Send it to the API
+    }
+
+    private void CVInputChanged(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+
+        if (file != null && file.Size > 0 && file.ContentType == "application/pdf")
+            StudentApply.CV = file;
     }
 
     protected override async Task OnInitializedAsync()
